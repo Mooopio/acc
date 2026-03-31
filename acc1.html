@@ -1,0 +1,1519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accounting Ch.1 — Master Study Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Space+Mono:wght@400;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #12121a;
+    --surface2: #1a1a26;
+    --border: #2a2a3d;
+    --accent: #f0c040;
+    --accent2: #5effc8;
+    --accent3: #ff6b6b;
+    --accent4: #a78bfa;
+    --text: #e8e8f0;
+    --muted: #7070a0;
+    --green: #22c55e;
+    --red: #ef4444;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Space Mono', monospace;
+    overflow-x: hidden;
+  }
+
+  /* ─── ANIMATED BG ─── */
+  body::before {
+    content:'';
+    position:fixed; inset:0; z-index:0;
+    background: radial-gradient(ellipse 80% 60% at 20% 10%, #1a0a3a55 0%, transparent 60%),
+                radial-gradient(ellipse 60% 80% at 80% 90%, #0a2a1a55 0%, transparent 60%);
+    pointer-events:none;
+  }
+
+  /* ─── HERO ─── */
+  #hero {
+    position:relative; z-index:1;
+    min-height:100vh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:2rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-tag {
+    font-size:.7rem; letter-spacing:.3em; text-transform:uppercase;
+    color:var(--accent2); border:1px solid var(--accent2);
+    padding:.4rem 1rem; border-radius:2rem; margin-bottom:2rem;
+    animation: fadeUp .6s ease both;
+  }
+  h1 {
+    font-family:'Syne', sans-serif; font-weight:800; font-size:clamp(2.5rem,8vw,6rem);
+    line-height:1.05; margin-bottom:1rem;
+    animation: fadeUp .7s ease both;
+  }
+  h1 span { color:var(--accent); }
+  .hero-sub {
+    font-size:.9rem; color:var(--muted); max-width:520px; line-height:1.8;
+    animation: fadeUp .8s ease both; margin-bottom:2.5rem;
+  }
+  .hero-btns {
+    display:flex; gap:1rem; flex-wrap:wrap; justify-content:center;
+    animation: fadeUp .9s ease both;
+  }
+  .btn {
+    padding:.75rem 1.75rem; border-radius:.5rem; font-family:'Space Mono'; font-size:.8rem;
+    cursor:pointer; border:none; transition: all .2s; text-decoration:none;
+    font-weight:700; letter-spacing:.05em;
+  }
+  .btn-primary { background:var(--accent); color:#0a0a0f; }
+  .btn-primary:hover { background:#fff; transform:translateY(-2px); box-shadow: 0 8px 30px #f0c04055; }
+  .btn-ghost { background:transparent; color:var(--accent2); border:1px solid var(--accent2); }
+  .btn-ghost:hover { background:var(--accent2); color:#0a0a0f; transform:translateY(-2px); }
+
+  /* ─── NAV ─── */
+  nav {
+    position:sticky; top:0; z-index:100;
+    background:#0a0a0fee; backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border);
+    padding:.75rem 2rem; display:flex; gap:.5rem; flex-wrap:wrap; align-items:center;
+  }
+  nav a {
+    color:var(--muted); text-decoration:none; font-size:.7rem;
+    letter-spacing:.1em; text-transform:uppercase; padding:.4rem .8rem;
+    border-radius:.3rem; transition:all .2s;
+  }
+  nav a:hover, nav a.active { color:var(--accent); background:#f0c04015; }
+  .nav-logo { font-family:'Syne'; font-weight:800; color:var(--accent); font-size:.95rem; margin-right:auto; }
+
+  /* ─── SECTIONS ─── */
+  section {
+    position:relative; z-index:1;
+    max-width:1100px; margin:0 auto; padding:5rem 2rem;
+    border-bottom:1px solid var(--border);
+  }
+  .sec-label {
+    font-size:.65rem; letter-spacing:.3em; text-transform:uppercase;
+    color:var(--accent); margin-bottom:1rem; display:flex; align-items:center; gap:.5rem;
+  }
+  .sec-label::after { content:''; flex:1; height:1px; background:var(--border); }
+  h2 {
+    font-family:'Syne'; font-weight:800; font-size:clamp(1.6rem,4vw,2.4rem);
+    margin-bottom:2.5rem; line-height:1.2;
+  }
+  h3 {
+    font-family:'Syne'; font-weight:700; font-size:1.1rem;
+    margin-bottom:1rem; color:var(--accent2);
+  }
+  p { font-size:.85rem; line-height:1.9; color:#c0c0d8; }
+
+  /* ─── DEFINITION DUEL ─── */
+  .def-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; }
+  @media(max-width:700px){ .def-grid { grid-template-columns:1fr; } }
+  .def-card {
+    background:var(--surface); border:1px solid var(--border); border-radius:1rem; padding:1.75rem;
+    position:relative; overflow:hidden; transition:all .3s;
+  }
+  .def-card:hover { border-color:var(--accent4); transform:translateY(-3px); box-shadow:0 12px 40px #a78bfa20; }
+  .def-card .badge {
+    display:inline-block; font-size:.6rem; letter-spacing:.15em; text-transform:uppercase;
+    padding:.3rem .75rem; border-radius:2rem; margin-bottom:1rem; font-weight:700;
+  }
+  .badge-sys { background:#f0c04020; color:var(--accent); border:1px solid #f0c04040; }
+  .badge-proc { background:#5effc820; color:var(--accent2); border:1px solid #5effc840; }
+  .def-card h3 { font-size:1.3rem; margin-bottom:.75rem; color:var(--text); }
+  .def-card .quote {
+    font-family:'Instrument Serif'; font-style:italic; font-size:1rem;
+    color:var(--muted); border-left:2px solid var(--border); padding-left:1rem; margin:1rem 0;
+  }
+  .steps { list-style:none; margin-top:1rem; }
+  .steps li {
+    display:flex; gap:1rem; align-items:flex-start; padding:.6rem 0;
+    border-bottom:1px solid var(--border); font-size:.8rem; color:#b0b0cc;
+  }
+  .steps li:last-child { border:none; }
+  .step-num {
+    min-width:1.8rem; height:1.8rem; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:.65rem; font-weight:700; flex-shrink:0;
+  }
+  .sn-y { background:#f0c04020; color:var(--accent); border:1px solid #f0c04040; }
+  .sn-g { background:#5effc820; color:var(--accent2); border:1px solid #5effc840; }
+  .steps li strong { color:var(--text); }
+
+  /* ─── USERS MAP ─── */
+  .users-split { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; }
+  @media(max-width:700px){ .users-split { grid-template-columns:1fr; } }
+  .user-card {
+    background:var(--surface); border:1px solid var(--border); border-radius:1rem; padding:1.5rem;
+    transition:all .3s;
+  }
+  .user-card:hover { border-color:var(--accent3); box-shadow:0 8px 30px #ff6b6b15; }
+  .user-card.internal { border-top:3px solid var(--accent); }
+  .user-card.external { border-top:3px solid var(--accent3); }
+  .user-type {
+    font-size:.65rem; letter-spacing:.2em; text-transform:uppercase;
+    font-weight:700; margin-bottom:1rem;
+  }
+  .ut-int { color:var(--accent); }
+  .ut-ext { color:var(--accent3); }
+  .need-list { list-style:none; margin:1rem 0; }
+  .need-list li {
+    font-size:.78rem; color:#b0b0cc; padding:.4rem 0;
+    border-bottom:1px solid #1e1e2e; display:flex; gap:.6rem; align-items:flex-start;
+  }
+  .need-list li::before { content:'→'; color:var(--muted); flex-shrink:0; }
+  .who-tag {
+    display:inline-block; font-size:.65rem; padding:.25rem .65rem; border-radius:2rem;
+    margin:.25rem; border:1px solid var(--border); color:var(--muted);
+    transition:all .2s; cursor:default;
+  }
+  .who-tag:hover { border-color:var(--accent2); color:var(--accent2); }
+
+  /* ─── EXTERNAL 6 GROUPS ─── */
+  .ext-groups { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:1rem; }
+  .ext-card {
+    background:var(--surface); border:1px solid var(--border); border-radius:.75rem;
+    padding:1.25rem; transition:all .3s; position:relative; overflow:hidden;
+  }
+  .ext-card::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:2px;
+  }
+  .ec1::before { background:var(--accent); }
+  .ec2::before { background:var(--accent3); }
+  .ec3::before { background:var(--accent2); }
+  .ec4::before { background:var(--accent4); }
+  .ec5::before { background:#f97316; }
+  .ec6::before { background:#06b6d4; }
+  .ext-card:hover { transform:translateY(-3px); border-color:#3a3a5a; }
+  .ext-icon { font-size:1.4rem; margin-bottom:.75rem; }
+  .ext-card h4 { font-family:'Syne'; font-size:.95rem; margin-bottom:.5rem; }
+  .ext-card p { font-size:.75rem; color:var(--muted); }
+
+  /* ─── REPORTS SECTION ─── */
+  .reports-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:1rem; }
+  .report-card {
+    background:var(--surface); border:1px solid var(--border); border-radius:.75rem;
+    padding:1.25rem; text-align:center; transition:all .3s; cursor:default;
+  }
+  .report-card:hover { transform:translateY(-4px); border-color:var(--accent4); box-shadow:0 10px 40px #a78bfa20; }
+  .r-num { font-family:'Syne'; font-size:2.5rem; font-weight:800; color:var(--border); margin-bottom:.5rem; }
+  .report-card h4 { font-family:'Syne'; font-size:.85rem; margin-bottom:.5rem; color:var(--accent2); }
+  .report-card p { font-size:.73rem; color:var(--muted); line-height:1.7; }
+
+  /* ─── STATEMENTS BREAKDOWN ─── */
+  .stmt-tabs { display:flex; gap:.5rem; margin-bottom:1.5rem; flex-wrap:wrap; }
+  .tab-btn {
+    padding:.5rem 1rem; background:var(--surface); border:1px solid var(--border);
+    color:var(--muted); font-family:'Space Mono'; font-size:.72rem; cursor:pointer;
+    border-radius:.4rem; transition:all .2s; letter-spacing:.05em;
+  }
+  .tab-btn.active { background:var(--accent); color:#0a0a0f; border-color:var(--accent); font-weight:700; }
+  .tab-content { display:none; animation: fadeUp .3s ease; }
+  .tab-content.active { display:block; }
+  .two-col { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; }
+  @media(max-width:600px){ .two-col { grid-template-columns:1fr; } }
+  .col-box {
+    background:var(--surface); border:1px solid var(--border); border-radius:.75rem; padding:1.25rem;
+  }
+  .col-box h4 { font-family:'Syne'; font-size:.85rem; margin-bottom:1rem; }
+  .col-box ul { list-style:none; }
+  .col-box ul li {
+    font-size:.78rem; color:#b0b0cc; padding:.4rem .6rem; border-radius:.3rem;
+    margin-bottom:.3rem; background:#ffffff05; border-left:2px solid var(--border);
+    transition:all .2s;
+  }
+  .col-box ul li:hover { border-color:var(--accent); color:var(--text); background:#f0c04008; }
+  .formula-box {
+    background:var(--surface2); border:1px solid var(--accent); border-radius:.75rem;
+    padding:1.25rem; margin-top:1.5rem; text-align:center;
+  }
+  .formula-box .formula { font-family:'Syne'; font-size:1.1rem; font-weight:800; color:var(--accent); margin:.5rem 0; }
+  .formula-box .sub { font-size:.75rem; color:var(--muted); }
+
+  /* ─── FIELDS ACCORDION ─── */
+  .accordion { display:flex; flex-direction:column; gap:.75rem; }
+  .acc-item {
+    background:var(--surface); border:1px solid var(--border); border-radius:.75rem; overflow:hidden;
+    transition:all .3s;
+  }
+  .acc-item.open { border-color:var(--accent4); }
+  .acc-header {
+    padding:1.25rem 1.5rem; display:flex; justify-content:space-between; align-items:center;
+    cursor:pointer; transition:background .2s;
+  }
+  .acc-header:hover { background:#ffffff05; }
+  .acc-left { display:flex; align-items:center; gap:1rem; }
+  .acc-icon { font-size:1.2rem; }
+  .acc-title { font-family:'Syne'; font-weight:700; font-size:.95rem; }
+  .acc-arrow {
+    width:1.5rem; height:1.5rem; border-radius:50%; border:1px solid var(--border);
+    display:flex; align-items:center; justify-content:center; font-size:.7rem;
+    transition:transform .3s; color:var(--muted); flex-shrink:0;
+  }
+  .acc-item.open .acc-arrow { transform:rotate(180deg); border-color:var(--accent4); color:var(--accent4); }
+  .acc-body { display:none; padding:0 1.5rem 1.5rem; font-size:.8rem; color:#b0b0cc; line-height:1.9; }
+  .acc-item.open .acc-body { display:block; animation: fadeUp .3s ease; }
+  .acc-body strong { color:var(--accent2); }
+  .acc-body .tag-row { display:flex; flex-wrap:wrap; gap:.5rem; margin-top:.75rem; }
+  .mini-tag {
+    font-size:.65rem; padding:.3rem .7rem; border-radius:2rem;
+    border:1px solid var(--border); color:var(--muted); background:#ffffff05;
+  }
+
+  /* ─── LEGAL FORMS ─── */
+  .forms-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; }
+  @media(max-width:700px){ .forms-grid { grid-template-columns:1fr; } }
+  .form-card {
+    background:var(--surface); border:1px solid var(--border); border-radius:1rem;
+    padding:1.75rem; text-align:center; transition:all .3s; position:relative; overflow:hidden;
+  }
+  .form-card::after {
+    content:''; position:absolute; bottom:0; left:0; right:0; height:3px;
+  }
+  .fc1::after { background:linear-gradient(90deg,var(--accent),transparent); }
+  .fc2::after { background:linear-gradient(90deg,var(--accent2),transparent); }
+  .fc3::after { background:linear-gradient(90deg,var(--accent4),transparent); }
+  .form-card:hover { transform:translateY(-4px); border-color:#3a3a5a; }
+  .form-big { font-family:'Syne'; font-size:3rem; font-weight:800; color:var(--border); }
+  .form-card h3 { font-size:1rem; margin:.5rem 0; color:var(--text); }
+  .form-card ul { list-style:none; text-align:left; margin-top:1rem; }
+  .form-card ul li { font-size:.75rem; color:var(--muted); padding:.3rem 0; border-bottom:1px solid var(--border); }
+  .form-card ul li::before { content:'• '; color:var(--accent4); }
+
+  /* ─── FLASHCARDS ─── */
+  #flashcards { background:var(--surface); }
+  .fc-area {
+    max-width:600px; margin:0 auto; text-align:center;
+  }
+  .flashcard-wrap { perspective:1000px; height:260px; cursor:pointer; margin-bottom:1.5rem; }
+  .flashcard-inner {
+    position:relative; width:100%; height:100%;
+    transform-style:preserve-3d; transition:transform .5s ease;
+  }
+  .flashcard-wrap.flipped .flashcard-inner { transform:rotateY(180deg); }
+  .flashcard-face {
+    position:absolute; inset:0; border-radius:1.25rem; padding:2rem;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    backface-visibility:hidden;
+  }
+  .fc-front {
+    background:linear-gradient(135deg,#1a1a2e,#12122a);
+    border:1px solid var(--border);
+  }
+  .fc-back {
+    background:linear-gradient(135deg,#1a2e1a,#0a1a0a);
+    border:1px solid var(--accent2);
+    transform:rotateY(180deg);
+  }
+  .fc-front .fc-q { font-family:'Syne'; font-size:1.2rem; font-weight:700; color:var(--text); line-height:1.4; }
+  .fc-front .fc-hint { font-size:.7rem; color:var(--muted); margin-top:.75rem; }
+  .fc-back .fc-a { font-size:.85rem; color:var(--accent2); line-height:1.7; }
+  .fc-counter { font-size:.75rem; color:var(--muted); margin-bottom:1rem; }
+  .fc-controls { display:flex; gap:.75rem; justify-content:center; }
+  .fc-btn {
+    padding:.6rem 1.4rem; border-radius:.4rem; font-family:'Space Mono'; font-size:.75rem;
+    cursor:pointer; border:1px solid var(--border); background:var(--surface2); color:var(--text);
+    transition:all .2s;
+  }
+  .fc-btn:hover { border-color:var(--accent); color:var(--accent); }
+  .fc-progress {
+    width:100%; height:3px; background:var(--border); border-radius:2rem; margin-bottom:1.5rem; overflow:hidden;
+  }
+  .fc-bar { height:100%; background:var(--accent); border-radius:2rem; transition:width .4s ease; }
+
+  /* ─── QUIZ ─── */
+  .quiz-area { max-width:680px; }
+  .q-box {
+    background:var(--surface); border:1px solid var(--border); border-radius:1rem; padding:1.75rem; margin-bottom:1rem;
+  }
+  .q-num { font-size:.65rem; color:var(--muted); letter-spacing:.1em; text-transform:uppercase; margin-bottom:.75rem; }
+  .q-text { font-family:'Syne'; font-size:1rem; font-weight:700; margin-bottom:1.25rem; line-height:1.5; }
+  .q-options { display:flex; flex-direction:column; gap:.6rem; }
+  .q-opt {
+    padding:.85rem 1.1rem; border-radius:.5rem; border:1px solid var(--border);
+    background:#ffffff05; cursor:pointer; font-size:.8rem; transition:all .2s; text-align:left;
+    display:flex; align-items:center; gap:.75rem;
+  }
+  .q-opt:hover:not(.disabled) { border-color:var(--accent4); background:#a78bfa10; }
+  .q-opt.correct { border-color:var(--green); background:#22c55e15; color:var(--green); }
+  .q-opt.wrong { border-color:var(--red); background:#ef444415; color:var(--red); }
+  .q-opt.disabled { cursor:default; }
+  .opt-letter {
+    min-width:1.6rem; height:1.6rem; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:.65rem; font-weight:700; border:1px solid var(--border); flex-shrink:0;
+  }
+  .q-feedback { margin-top:1rem; padding:.85rem 1.1rem; border-radius:.5rem; font-size:.78rem; display:none; }
+  .q-feedback.show { display:block; }
+  .q-feedback.correct-fb { background:#22c55e15; border:1px solid var(--green); color:var(--green); }
+  .q-feedback.wrong-fb { background:#ef444415; border:1px solid var(--red); color:#ff8080; }
+  .quiz-score {
+    background:var(--surface2); border:1px solid var(--accent); border-radius:1rem;
+    padding:1.5rem; text-align:center; display:none;
+  }
+  .score-big { font-family:'Syne'; font-size:3rem; font-weight:800; color:var(--accent); }
+  .quiz-nav { display:flex; gap:.75rem; margin-top:1.5rem; }
+
+  /* ─── KEY TERMS ─── */
+  .terms-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:1rem; }
+  .term-card {
+    background:var(--surface); border:1px solid var(--border); border-radius:.75rem;
+    padding:1.25rem; transition:all .3s;
+  }
+  .term-card:hover { border-color:var(--accent); transform:translateY(-2px); }
+  .term-word { font-family:'Syne'; font-weight:800; font-size:1rem; color:var(--accent); margin-bottom:.5rem; }
+  .term-def { font-size:.78rem; color:#b0b0cc; line-height:1.7; }
+
+  /* ─── CHEATSHEET / SUMMARY TABLE ─── */
+  .cheat-table { width:100%; border-collapse:collapse; font-size:.78rem; }
+  .cheat-table th {
+    background:var(--surface2); padding:.85rem 1rem; text-align:left;
+    border:1px solid var(--border); font-family:'Syne'; font-size:.75rem;
+    color:var(--accent); letter-spacing:.05em;
+  }
+  .cheat-table td {
+    padding:.75rem 1rem; border:1px solid var(--border); color:#b0b0cc;
+    vertical-align:top; line-height:1.7;
+  }
+  .cheat-table tr:hover td { background:#ffffff04; }
+  .cheat-table td strong { color:var(--text); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    text-align:center; padding:3rem 2rem; border-top:1px solid var(--border);
+    color:var(--muted); font-size:.7rem; letter-spacing:.1em;
+    position:relative; z-index:1;
+  }
+  footer span { color:var(--accent); }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(20px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+  .reveal { opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease; }
+  .reveal.visible { opacity:1; transform:none; }
+
+  /* ─── SCROLLBAR ─── */
+  ::-webkit-scrollbar { width:6px; }
+  ::-webkit-scrollbar-track { background:var(--bg); }
+  ::-webkit-scrollbar-thumb { background:var(--border); border-radius:3px; }
+  ::-webkit-scrollbar-thumb:hover { background:var(--accent); }
+
+  /* ─── MEMORY TRICKS ─── */
+  .trick-box {
+    background:linear-gradient(135deg,#1a1a0a,#1a0a0a);
+    border:1px solid #f0c04040; border-radius:1rem; padding:1.5rem; margin-top:1rem;
+  }
+  .trick-label { font-size:.65rem; color:var(--accent); letter-spacing:.2em; text-transform:uppercase; margin-bottom:.5rem; }
+  .trick-text { font-family:'Instrument Serif'; font-style:italic; font-size:1rem; color:#f0e090; line-height:1.6; }
+
+  .highlight { color:var(--accent); font-weight:700; }
+  .h-green { color:var(--accent2); }
+  .h-red { color:var(--accent3); }
+  .h-purple { color:var(--accent4); }
+
+  /* sticky progress */
+  #progress-bar {
+    position:fixed; top:0; left:0; height:2px; background:var(--accent);
+    z-index:999; transition:width .1s;
+  }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">ACC101</span>
+  <a href="#definition" onclick="setActive(this)">Definition</a>
+  <a href="#users" onclick="setActive(this)">Users</a>
+  <a href="#reports" onclick="setActive(this)">Reports</a>
+  <a href="#objectives" onclick="setActive(this)">Objectives</a>
+  <a href="#fields" onclick="setActive(this)">Fields</a>
+  <a href="#legal" onclick="setActive(this)">Legal Forms</a>
+  <a href="#flashcards" onclick="setActive(this)">Flashcards</a>
+  <a href="#quiz" onclick="setActive(this)">Quiz 🔥</a>
+  <a href="#terms" onclick="setActive(this)">Key Terms</a>
+</nav>
+
+<!-- HERO -->
+<div id="hero">
+  <div class="hero-tag">Accounting Principles 1 · Chapter 1</div>
+  <h1>Master <span>Accounting</span><br>Chapter One</h1>
+  <p class="hero-sub">Every single concept from Dr. Hamdy's lecture. Interactive flashcards, quiz, memory tricks, and full breakdowns. You will ace this exam. 💯</p>
+  <div class="hero-btns">
+    <a href="#definition" class="btn btn-primary">Start Studying →</a>
+    <a href="#quiz" class="btn btn-ghost">Take the Quiz</a>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     SECTION 1: DEFINITION
+════════════════════════════════ -->
+<section id="definition">
+  <div class="sec-label">Section 01 · Definition of Accounting</div>
+  <h2>What is <span style="color:var(--accent)">Accounting</span>?</h2>
+
+  <div class="def-grid reveal">
+    <div class="def-card">
+      <span class="badge badge-sys">As a System</span>
+      <h3>The System View</h3>
+      <div class="quote">"To provide quantitative information with financial nature, about an economic entity to help in making economic decisions."</div>
+      <p style="font-size:.78rem;color:var(--muted);margin-bottom:.75rem;">Three keywords to remember — use the trick below:</p>
+      <ul class="steps">
+        <li>
+          <span class="step-num sn-y">1</span>
+          <div><strong>Quantitative Information</strong><br>Numbers only. No info about location, staff, hiring = excluded.</div>
+        </li>
+        <li>
+          <span class="step-num sn-y">2</span>
+          <div><strong>Financial Nature</strong><br>Must be expressible in monetary units (money). Non-monetary = out.</div>
+        </li>
+        <li>
+          <span class="step-num sn-y">3</span>
+          <div><strong>Decision Making</strong><br>The ultimate goal. All accounting exists to help someone decide.</div>
+        </li>
+      </ul>
+      <div class="trick-box" style="margin-top:1rem">
+        <div class="trick-label">🧠 Memory Trick</div>
+        <div class="trick-text">"<span class="highlight">Q</span>uiet <span class="highlight">F</span>inancial <span class="highlight">D</span>ecisions"<br>Q = Quantitative · F = Financial · D = Decisions</div>
+      </div>
+    </div>
+
+    <div class="def-card">
+      <span class="badge badge-proc">As a Process</span>
+      <h3>The Process View</h3>
+      <div class="quote">"Identifying, recording, summarizing, and reporting economic information about an economic entity to decision makers."</div>
+      <p style="font-size:.78rem;color:var(--muted);margin-bottom:.75rem;">4 Steps — must know them in ORDER:</p>
+      <ul class="steps">
+        <li>
+          <span class="step-num sn-g">1</span>
+          <div><strong>Identifying</strong><br>Analyze transactions → separate financial from non-financial events.</div>
+        </li>
+        <li>
+          <span class="step-num sn-g">2</span>
+          <div><strong>Recording (Journalizing)</strong><br>Write financial events into the journal (the books/records).</div>
+        </li>
+        <li>
+          <span class="step-num sn-g">3</span>
+          <div><strong>Summarizing</strong><br>Transfer to ledger, classify accounts, make Trial Balance.</div>
+        </li>
+        <li>
+          <span class="step-num sn-g">4</span>
+          <div><strong>Reporting</strong><br>Prepare the general-purpose financial statements.</div>
+        </li>
+      </ul>
+      <div class="trick-box" style="margin-top:1rem">
+        <div class="trick-label">🧠 Memory Trick</div>
+        <div class="trick-text">"<span class="h-green">I</span> <span class="h-green">R</span>eally <span class="h-green">S</span>tudy <span class="h-green">R</span>eports"<br>I=Identify · R=Record · S=Summarize · R=Report</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     SECTION 2: USERS
+════════════════════════════════ -->
+<section id="users">
+  <div class="sec-label">Section 02 · Accounting Users</div>
+  <h2>Who Uses <span style="color:var(--accent)">Accounting?</span></h2>
+
+  <div class="users-split reveal">
+    <div class="user-card internal">
+      <div class="user-type ut-int">⚙️ Internal Users</div>
+      <h3>Inside the Company</h3>
+      <p style="font-size:.78rem">Need <strong>detailed, financial & non-financial, historical & estimated</strong> information.</p>
+      <ul class="need-list">
+        <li>Planning the future activities</li>
+        <li>Coordinating between departments</li>
+        <li>Directing day-to-day operations</li>
+        <li>Controlling & taking corrective actions</li>
+      </ul>
+      <div style="margin-top:1rem">
+        <div class="trick-label" style="font-size:.62rem;letter-spacing:.15em;color:var(--accent);text-transform:uppercase;margin-bottom:.4rem">🧠 PCDC Trick</div>
+        <div style="font-size:.78rem;color:#d0d0e8"><span class="highlight">P</span>lan · <span class="highlight">C</span>oordinate · <span class="highlight">D</span>irect · <span class="highlight">C</span>ontrol</div>
+      </div>
+      <div style="margin-top:1rem">
+        <span class="who-tag">Management</span>
+        <span class="who-tag">Workers / Employees</span>
+      </div>
+    </div>
+
+    <div class="user-card external">
+      <div class="user-type ut-ext">🌐 External Users</div>
+      <h3>Outside the Company</h3>
+      <p style="font-size:.78rem">Need <strong>total, historical, financial</strong> information about firm's activities and results.</p>
+      <ul class="need-list">
+        <li>Know about Profitability</li>
+        <li>Know about Resources & their uses</li>
+        <li>Evaluate financial position</li>
+        <li>Evaluate ability to grow, continue & pay debts</li>
+      </ul>
+      <div style="margin-top:1rem">
+        <span class="who-tag">Investors</span>
+        <span class="who-tag">Creditors & Banks</span>
+        <span class="who-tag">Suppliers</span>
+        <span class="who-tag">Customers</span>
+        <span class="who-tag">Workers Unions</span>
+        <span class="who-tag">Competitors</span>
+        <span class="who-tag">Government</span>
+        <span class="who-tag">Financial Analysts</span>
+        <span class="who-tag">Public</span>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:3rem;margin-bottom:1.5rem;color:var(--text);font-family:'Syne';font-size:1.1rem">The 6 External User Groups — Full Detail</h3>
+  <div class="ext-groups reveal">
+    <div class="ext-card ec1">
+      <div class="ext-icon">💰</div>
+      <h4>Investors</h4>
+      <p><strong style="color:#e0e0f0">Current:</strong> Need info on cash flows & uncertainty to decide <em>continue or exit?</em><br><br>
+      <strong style="color:#e0e0f0">Potential/Future:</strong> Same info but to <em>compare alternatives</em> & find the best opportunity.</p>
+    </div>
+    <div class="ext-card ec2">
+      <div class="ext-icon">🏦</div>
+      <h4>Creditors & Banks</h4>
+      <p>Need info about <strong style="color:#e0e0f0">financial position</strong> of the firm to evaluate its ability to <strong style="color:#e0e0f0">repay loans and debts</strong>.</p>
+    </div>
+    <div class="ext-card ec3">
+      <div class="ext-icon">📦</div>
+      <h4>Suppliers</h4>
+      <p>Ensure the company will <strong style="color:#e0e0f0">continue active in business</strong> with the same ability to repay its obligations.</p>
+    </div>
+    <div class="ext-card ec4">
+      <div class="ext-icon">🛒</div>
+      <h4>Customers</h4>
+      <p>Make sure goods & services can <strong style="color:#e0e0f0">still be provided</strong> — spare parts, maintenance, replacements.</p>
+    </div>
+    <div class="ext-card ec5">
+      <div class="ext-icon">👷</div>
+      <h4>Manpower & Workers Unions</h4>
+      <p>Know their <strong style="color:#e0e0f0">share in profits</strong>, negotiate benefits & salaries, evaluate <strong style="color:#e0e0f0">employment position</strong>.</p>
+    </div>
+    <div class="ext-card" style="border-top-color:#06b6d4">
+      <div class="ext-icon">⚔️</div>
+      <h4>Competitors</h4>
+      <p>Evaluate their <strong style="color:#e0e0f0">competitive position</strong> and the possibility of growth and expansion.</p>
+    </div>
+    <div class="ext-card" style="border-top-color:#8b5cf6">
+      <div class="ext-icon">🏛️</div>
+      <h4>Governmental Agencies</h4>
+      <p>Tax Authority · Ministry of Planning · Ministry of Industry · Stock Exchange Commission<br><br>Evaluate entities' contribution to <strong style="color:#e0e0f0">national income & added value</strong>.</p>
+    </div>
+    <div class="ext-card" style="border-top-color:#ec4899">
+      <div class="ext-icon">📊</div>
+      <h4>Financial Analysts & Public</h4>
+      <p><strong style="color:#e0e0f0">Analysts:</strong> Evaluate organizations, give consultation, academic research.<br><br>
+      <strong style="color:#e0e0f0">Public:</strong> Know about services & products available in their area.</p>
+    </div>
+  </div>
+
+  <div class="trick-box reveal" style="margin-top:2rem">
+    <div class="trick-label">🧠 Remember the 6 External Groups</div>
+    <div class="trick-text">"<span class="highlight">I</span>ntelligent <span class="highlight">C</span>ats <span class="highlight">S</span>it <span class="highlight">C</span>omfortably <span class="highlight">M</span>eowing <span class="highlight">C</span>leverly <span class="highlight">G</span>iving <span class="highlight">F</span>ree <span class="highlight">P</span>urrs"<br>
+    <span style="font-size:.8rem;font-style:normal">I=Investors · C=Creditors · S=Suppliers · C=Customers · M=Manpower · C=Competitors · G=Government · F=Financial Analysts · P=Public</span></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     SECTION 3: ACCOUNTING REPORTS
+════════════════════════════════ -->
+<section id="reports">
+  <div class="sec-label">Section 03 · Accounting Reports</div>
+  <h2>Types of <span style="color:var(--accent)">Reports</span></h2>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem" class="reveal">
+    <div class="col-box">
+      <h4 style="color:var(--accent)">📋 Internal Reports</h4>
+      <p style="font-size:.78rem;margin-bottom:1rem">Prepared for <strong>internal users only</strong> (management, inside the firm).</p>
+      <ul>
+        <li>Budgets</li>
+        <li>Cost Statements</li>
+        <li>Performance Evaluation Reports</li>
+        <li>Responsibility Accounting Reports</li>
+      </ul>
+    </div>
+    <div class="col-box" style="border-color:#5effc840">
+      <h4 style="color:var(--accent2)">📄 External Reports</h4>
+      <p style="font-size:.78rem;margin-bottom:1rem">Called <strong>General-Purpose Financial Statements</strong>. For <em>both</em> internal & external, but <em>mainly external</em>.</p>
+      <ul>
+        <li>Statement of Financial Position (Balance Sheet)</li>
+        <li>Income Statement</li>
+        <li>Statement of Owners' Equity</li>
+        <li>Statement of Cash Flow</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 style="margin-top:3rem;margin-bottom:1.5rem;color:var(--text);font-family:'Syne'">The 4 Financial Statements — Deep Dive</h3>
+  <div class="stmt-tabs reveal">
+    <button class="tab-btn active" onclick="switchTab(this,'tab-bs')">Balance Sheet</button>
+    <button class="tab-btn" onclick="switchTab(this,'tab-is')">Income Statement</button>
+    <button class="tab-btn" onclick="switchTab(this,'tab-oe')">Owners' Equity</button>
+    <button class="tab-btn" onclick="switchTab(this,'tab-cf')">Cash Flow</button>
+  </div>
+
+  <!-- Balance Sheet -->
+  <div class="tab-content active" id="tab-bs">
+    <p style="margin-bottom:1.5rem;font-size:.82rem">Contains <span class="highlight">3 accounts</span> called <strong>Permanent / Real accounts</strong>. Shows the <span class="h-green">financial position</span> of the entity.</p>
+    <div class="two-col">
+      <div>
+        <div class="col-box" style="margin-bottom:1rem">
+          <h4 style="color:var(--accent)">Assets (Rights / Resources)</h4>
+          <p style="font-size:.75rem;margin-bottom:.75rem;color:var(--muted)">Expected economic benefits <strong>controlled by the entity</strong> as a result of <em>past transactions</em>.</p>
+          <ul>
+            <li>Land · Building · Equipment · Furniture</li>
+            <li>Cash (Box + Bank)</li>
+            <li>Inventory</li>
+            <li>Office Supplies</li>
+            <li>Accounts Receivable</li>
+            <li>Notes Receivable</li>
+            <li>Prepaid Expenses</li>
+            <li>Accrued Revenues</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <div class="col-box" style="margin-bottom:1rem;border-color:#ff6b6b40">
+          <h4 style="color:var(--accent3)">Liabilities (Obligations)</h4>
+          <p style="font-size:.75rem;margin-bottom:.75rem;color:var(--muted)">Future economic sacrifices resulting from <em>current obligations</em> to transfer or render service in the <strong>future</strong>.</p>
+          <ul>
+            <li>Accounts Payable</li>
+            <li>Notes Payable</li>
+            <li>Expenses Payable</li>
+            <li>Unearned Revenues</li>
+            <li>Loans</li>
+          </ul>
+        </div>
+        <div class="col-box" style="border-color:#a78bfa40">
+          <h4 style="color:var(--accent4)">Owner's Equity (Capital)</h4>
+          <p style="font-size:.75rem;margin-bottom:.75rem;color:var(--muted)">The <strong>remaining of assets after subtracting all liabilities</strong>.</p>
+          <ul>
+            <li>Capital</li>
+            <li>+ Net Profit</li>
+            <li>(−) Drawings</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="formula-box" style="margin-top:1rem">
+      <div class="sub">The Accounting Equation (MOST IMPORTANT)</div>
+      <div class="formula">Assets = Liabilities + Owner's Equity</div>
+      <div class="sub">Or: Owner's Equity = Assets − Liabilities</div>
+    </div>
+  </div>
+
+  <!-- Income Statement -->
+  <div class="tab-content" id="tab-is">
+    <p style="margin-bottom:1.5rem;font-size:.82rem">Prepared at the <span class="highlight">end of each accounting period (usually a year)</span>. Contains <span class="h-green">2 accounts</span> called <strong>Temporary / Nominal accounts</strong>: Revenues & Expenses.</p>
+    <div class="two-col">
+      <div class="col-box" style="border-color:#5effc840">
+        <h4 style="color:var(--accent2)">Revenues (Credits)</h4>
+        <p style="font-size:.75rem;margin-bottom:.75rem;color:var(--muted)">Price for selling products/goods OR rendering services — <strong>regardless of when collected</strong>.</p>
+        <ul>
+          <li>Sales Revenue</li>
+          <li>Interest Revenue</li>
+          <li>Services Revenue</li>
+        </ul>
+      </div>
+      <div class="col-box" style="border-color:#ff6b6b40">
+        <h4 style="color:var(--accent3)">Expenses (Debits)</h4>
+        <p style="font-size:.75rem;margin-bottom:.75rem;color:var(--muted)">Cost of providing resources & facilities to perform service or sell products.</p>
+        <ul>
+          <li>Insurance Expense</li>
+          <li>Rent Expense</li>
+          <li>Electricity Expense</li>
+          <li>Salaries Expense</li>
+        </ul>
+      </div>
+    </div>
+    <div class="formula-box" style="margin-top:1rem">
+      <div class="formula">Profit (Net Income) = Revenues − Expenses &gt; 0</div>
+      <div class="formula" style="color:var(--accent3);margin-top:.5rem">Loss = Revenues − Expenses &lt; 0</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem">
+      <div class="col-box" style="border-color:#22c55e40">
+        <h4 style="color:var(--green)">📈 Gains (Increase Equity)</h4>
+        <p style="font-size:.76rem;color:var(--muted)">Inflow from <strong>non-central / non-repeatable</strong> activities of the firm. (e.g. selling old equipment)</p>
+      </div>
+      <div class="col-box" style="border-color:#ef444440">
+        <h4 style="color:var(--red)">📉 Losses as an Item (Decrease Equity)</h4>
+        <p style="font-size:.76rem;color:var(--muted)">Expense from <strong>central/repeatable activities</strong> with <em>no benefits in return</em>. Shown inside income statement.</p>
+      </div>
+    </div>
+    <div class="trick-box" style="margin-top:1rem">
+      <div class="trick-label">🧠 Key Distinction — Losses</div>
+      <div class="trick-text">Loss <strong>as an item</strong> = inside income statement (it's an expense, central activity, no benefit)<br>Loss <strong>as a result</strong> = when total Revenues &lt; total Expenses (the bottom line is negative)</div>
+    </div>
+  </div>
+
+  <!-- Owners' Equity -->
+  <div class="tab-content" id="tab-oe">
+    <p style="margin-bottom:1.5rem;font-size:.82rem">Measures and calculates the <span class="highlight">company's obligations toward its owners</span>.</p>
+    <div class="col-box" style="max-width:500px">
+      <h4 style="color:var(--accent4)">Owner's Equity Components</h4>
+      <ul style="margin-top:.75rem">
+        <li>Capital (initial investment)</li>
+        <li>+ Net Income (if profitable period)</li>
+        <li>− Drawings (money taken out by owner)</li>
+        <li>− Net Loss (if loss period)</li>
+      </ul>
+    </div>
+    <div class="formula-box" style="max-width:500px;margin-top:1rem">
+      <div class="formula">Ending OE = Capital + Net Income − Drawings</div>
+    </div>
+  </div>
+
+  <!-- Cash Flow -->
+  <div class="tab-content" id="tab-cf">
+    <p style="margin-bottom:1.5rem;font-size:.82rem">Determines and calculates the <span class="highlight">cash in and cash out</span> of the company.</p>
+    <div class="two-col">
+      <div class="col-box" style="border-color:#5effc840">
+        <h4 style="color:var(--accent2)">💵 Cash Inflows (Cash Collected / Cash In)</h4>
+        <ul style="margin-top:.75rem">
+          <li>Cash collected from customers</li>
+          <li>Cash received from investments</li>
+          <li>Loans received</li>
+        </ul>
+      </div>
+      <div class="col-box" style="border-color:#ff6b6b40">
+        <h4 style="color:var(--accent3)">💸 Cash Outflows (Cash Paid / Cash Out)</h4>
+        <ul style="margin-top:.75rem">
+          <li>Cash paid for expenses</li>
+          <li>Cash paid to suppliers</li>
+          <li>Loan repayments</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     SECTION 4: OBJECTIVES
+════════════════════════════════ -->
+<section id="objectives">
+  <div class="sec-label">Section 04 · Accounting Objectives</div>
+  <h2>The 4 <span style="color:var(--accent)">Objectives</span></h2>
+
+  <div class="reports-grid reveal">
+    <div class="report-card">
+      <div class="r-num">01</div>
+      <h4>Determine Profit or Loss</h4>
+      <p>Profit/Loss = Total Revenues − Total Expenses<br><br>Tool used: <span class="highlight">Income Statement</span></p>
+    </div>
+    <div class="report-card">
+      <div class="r-num">02</div>
+      <h4>Determine Assets & Liabilities</h4>
+      <p>Know the rights (resources) and obligations of the enterprise.<br><br>Tool used: <span class="h-green">Statement of Financial Position</span></p>
+    </div>
+    <div class="report-card">
+      <div class="r-num">03</div>
+      <h4>Determine Cash Flows</h4>
+      <p>Cash inflows (collected) and cash outflows (paid) of the enterprise.<br><br>Tool used: <span class="h-red">Cash Flows Statement</span></p>
+    </div>
+    <div class="report-card">
+      <div class="r-num">04</div>
+      <h4>Determine Owner's Rights</h4>
+      <p>Rights of the owners of the firm (owner's equity).<br><br>Tool used: <span class="h-purple">Statement of Owners' Equity</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     SECTION 5: FIELDS
+════════════════════════════════ -->
+<section id="fields">
+  <div class="sec-label">Section 05 · Fields of Accounting</div>
+  <h2>9 <span style="color:var(--accent)">Fields</span> of Accounting</h2>
+
+  <div class="accordion reveal">
+
+    <div class="acc-item open">
+      <div class="acc-header" onclick="toggleAcc(this)">
+        <div class="acc-left"><span class="acc-icon">📊</span><span class="acc-title">Financial Accounting</span></div>
+        <div class="acc-arrow">▼</div>
+      </div>
+      <div class="acc-body">
+        Provides information for <strong>external users</strong> through analyzing, recording, classifying, summarizing and reporting financial events.<br><br>
+        → Think: <strong>General-purpose financial statements</strong> for the outside world.
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-header" onclick="toggleAcc(this)">
+        <div class="acc-left"><span class="acc-icon">🎯</span><span class="acc-title">Managerial Accounting</span></div>
+        <div class="acc-arrow">▼</div>
+      </div>
+      <div class="acc-body">
+        Provides information for <strong>internal users</strong> to help in planning and controlling activities.<br><br>
+        Tools used: <strong>Budgets · Responsibility Accounting · Cost Accounting</strong>
+        <div class="tag-row">
+          <span class="mini-tag">Internal Only</span>
+          <span class="mini-tag">Planning</span>
+          <span class="mini-tag">Controlling</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-header" onclick="toggleAcc(this)">
+        <div class="acc-left"><span class="acc-icon">💲</span><span class="acc-title">Cost Accounting</span></div>
+        <div class="acc-arrow">▼</div>
+      </div>
+      <div class="acc-body">
+        Provides info for <strong>internal users</strong>. Records, measures and reports cost information to help in:<br><br>
+        1. <strong>Costing products and services</strong><br>
+        2. <strong>Controlling cost</strong><br><br>
+        Uses: <strong>Actual cost system</strong> OR <strong>Predetermined cost system</strong><br><br>
+        If Predetermined system → compare actual vs. predetermined → find variances → know reasons → take corrective action.
+        <div class="tag-row">
+          <span class="mini-tag">Actual Cost System</span>
+          <span class="mini-tag">Predetermined Cost System</span>
+          <span class="mini-tag">Variances</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-header" onclick="toggleAcc(this)">
+        <div class="acc-left"><span class="acc-icon">📅</span><span class="acc-title">Budgeting</span></div>
+        <div class="acc-arrow">▼</div>
+      </div>
+      <div class="acc-body">
+        A system of <strong>Planning</strong> and <strong>Controlling</strong>:<br><br>
+        <strong>Planning:</strong> Translating the company's goals into numerical expression in the form of a certified plan.<br><br>
+        <strong>Controlling:</strong> Comparing actual results with the planned ones → evaluate performance → take corrective actions if needed.
+        <div class="tag-row">
+          <span class="mini-tag">Planning</span>
+          <span class="mini-tag">Controlling</span>
+          <span class="mini-tag">Numerical Goals</span>
+          <span class="mini-tag">Corrective Actions</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-header" onclick="toggleAcc(this)">
+        <div class="acc-left"><span class="acc-icon">🏛️</span><span class="acc-title">Governmental Accounting</span></div>
+        <div class="acc-arrow">▼</div>
+      </div>
+      <div class="acc-body">
+        Deals with <strong>governmental activities and units at all levels</strong>.<br><br>
+        1. Preparing the <strong>public budget</strong> and final accounts → know financial positions.<br>
+        2. Doing <strong>financial control before and after spending</strong>.
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-header" onclick="toggleAcc(this)">
+        <div class="acc-left"><span class="acc-icon">📋</span><span class="acc-title">Tax Accounting</span></div>
+        <div class="acc-arrow">▼</div>
+      </div>
+      <div class="acc-body">
+        Helps in:<br>
+        1. Determining <strong>taxable income</strong>.<br>
+        2. Determining the <strong>amount of taxes to be paid</strong>.<br>
+        3. <strong>Tax planning</strong> = trying to reduce taxes to the minimum / maximize use of exemptions or tax credits.
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-header" onclick="toggleAcc(this)">
+        <div class="acc-left"><span class="acc-icon">🌍</span><span class="acc-title">National Accounting</span></div>
+        <div class="acc-arrow">▼</div>
+      </div>
+      <div class="acc-body">
+        Provides information for <strong>the state (government)</strong>. Accounts for all sectors of the national economy by:<br><br>
+        1. Measuring the <strong>national income</strong> and each sector's contribution.<br>
+        2. Preparing the <strong>national budget, national income accounts, and input/output tables</strong>.
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-header" onclick="toggleAcc(this)">
+        <div class="acc-left"><span class="acc-icon">✈️</span><span class="acc-title">International Accounting</span></div>
+        <div class="acc-arrow">▼</div>
+      </div>
+      <div class="acc-body">
+        Deals with:<br>
+        1. Accounting issues of <strong>foreign currencies and exchange rates</strong>.<br>
+        2. Preparing financial statements for <strong>multinational companies</strong>.<br>
+        3. <strong>Translation</strong> of financial statements of foreign branches and companies.<br>
+        4. <strong>Harmonizing</strong> local and international accounting standards.<br>
+        5. <strong>Reducing differences</strong> in practices between nations to keep comparability.
+        <div class="tag-row">
+          <span class="mini-tag">Foreign Currencies</span>
+          <span class="mini-tag">Multinational</span>
+          <span class="mini-tag">Harmonization</span>
+          <span class="mini-tag">Comparability</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-header" onclick="toggleAcc(this)">
+        <div class="acc-left"><span class="acc-icon">🔍</span><span class="acc-title">Auditing</span></div>
+        <div class="acc-arrow">▼</div>
+      </div>
+      <div class="acc-body">
+        Examining the whole company by:<br>
+        1. <strong>Examine and evaluate internal control system</strong>.<br>
+        2. <strong>Review documents, records and financial statements</strong>.<br><br>
+        Purpose: Collect evidence from <strong>inside and outside</strong> the company, so the auditor can give his <strong>professional opinion on the fairness</strong> of the financial statements. The auditor is <strong>responsible for any negligence</strong> in his audit.
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-header" onclick="toggleAcc(this)">
+        <div class="acc-left"><span class="acc-icon">📌</span><span class="acc-title">Responsibility Accounting</span></div>
+        <div class="acc-arrow">▼</div>
+      </div>
+      <div class="acc-body">
+        Provides information for <strong>internal users (management)</strong>.<br><br>
+        Means <strong>dividing the company into units</strong> called <strong>Responsibility Centers</strong>.<br><br>
+        • Every center has a <strong>manager</strong>.<br>
+        • That manager is responsible for all revenues and expenses <strong>under his control and authority only</strong>.<br>
+        • Manager's performance is evaluated by <strong>variances resulting from their decisions</strong>.
+        <div class="tag-row">
+          <span class="mini-tag">Responsibility Centers</span>
+          <span class="mini-tag">Manager Accountability</span>
+          <span class="mini-tag">Variance Analysis</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="trick-box reveal" style="margin-top:2rem">
+    <div class="trick-label">🧠 Remember All 9 Fields</div>
+    <div class="trick-text">"<span class="highlight">F</span>ancy <span class="highlight">M</span>anagers <span class="highlight">C</span>ount <span class="highlight">B</span>udgets <span class="highlight">G</span>overnment <span class="highlight">T</span>axes <span class="highlight">N</span>ationally, <span class="highlight">I</span>nternational <span class="highlight">A</span>uditors <span class="highlight">R</span>eport"<br>
+    <span style="font-size:.75rem;font-style:normal">F=Financial · M=Managerial · C=Cost · B=Budgeting · G=Governmental · T=Tax · N=National · I=International · A=Auditing · R=Responsibility</span></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     SECTION 6: LEGAL FORMS
+════════════════════════════════ -->
+<section id="legal">
+  <div class="sec-label">Section 06 · Legal Forms of Business</div>
+  <h2>3 Legal <span style="color:var(--accent)">Business Forms</span></h2>
+
+  <div class="forms-grid reveal">
+    <div class="form-card fc1">
+      <div class="form-big">01</div>
+      <h3 style="color:var(--accent)">Proprietorship</h3>
+      <p style="font-size:.75rem;color:var(--muted);margin-bottom:1rem">Solo. One owner. Simplest form.</p>
+      <ul>
+        <li>ONE owner only</li>
+        <li>Owner gets all profit OR takes all loss</li>
+        <li>Owner IS the manager</li>
+        <li>Unlimited personal liability</li>
+      </ul>
+    </div>
+    <div class="form-card fc2">
+      <div class="form-big">02</div>
+      <h3 style="color:var(--accent2)">Partnership</h3>
+      <p style="font-size:.75rem;color:var(--muted);margin-bottom:1rem">Team. 2–20 partners.</p>
+      <ul>
+        <li>More than one owner (partner)</li>
+        <li>Max 20 partners</li>
+        <li>Each unlimited partner = a manager</li>
+        <li>Shared profit / loss</li>
+      </ul>
+    </div>
+    <div class="form-card fc3">
+      <div class="form-big">03</div>
+      <h3 style="color:var(--accent4)">Corporation</h3>
+      <p style="font-size:.75rem;color:var(--muted);margin-bottom:1rem">The big one. Unlimited owners (shareholders).</p>
+      <ul>
+        <li>Unlimited number of shareholders</li>
+        <li>Huge capital</li>
+        <li>LIMITED liability (per shares owned)</li>
+        <li>Legally SEPARATE entity from owners</li>
+        <li>Unlimited ability to raise funds</li>
+        <li>Flexibility of capital transfer</li>
+        <li>Continuity</li>
+        <li>Separate legal entity</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="trick-box reveal" style="margin-top:2rem">
+    <div class="trick-label">🧠 Corporation's 4 Characteristics — UFCS</div>
+    <div class="trick-text">"<span class="highlight">U</span>nited <span class="highlight">F</span>amilies <span class="highlight">C</span>reate <span class="highlight">S</span>eparation"<br>
+    <span style="font-style:normal;font-size:.8rem">U=Unlimited ability to raise funds · F=Flexibility of capital transfer · C=Continuity · S=Separate legal entity</span></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     SECTION 7: KEY TERMS
+════════════════════════════════ -->
+<section id="terms">
+  <div class="sec-label">Section 07 · Key Terms Glossary</div>
+  <h2>Master the <span style="color:var(--accent)">Vocabulary</span></h2>
+
+  <div class="terms-grid reveal">
+    <div class="term-card">
+      <div class="term-word">Assets</div>
+      <div class="term-def">Expected economic benefits <strong>controlled by the entity</strong> as a result of <em>past transactions</em>.</div>
+    </div>
+    <div class="term-card">
+      <div class="term-word">Liabilities</div>
+      <div class="term-def">Future economic sacrifices resulting from current obligations to transfer or render service to other entities in the future as a result of past transactions or events.</div>
+    </div>
+    <div class="term-card">
+      <div class="term-word">Owner's Equity</div>
+      <div class="term-def">The <strong>remaining of assets after subtracting all liabilities</strong>. Also called Capital.</div>
+    </div>
+    <div class="term-card">
+      <div class="term-word">Revenue</div>
+      <div class="term-def">Price for selling products/goods OR rendering services, regardless of <strong>whether collected</strong> during the period or not.</div>
+    </div>
+    <div class="term-card">
+      <div class="term-word">Expenses</div>
+      <div class="term-def">Cost of providing resources and facilities necessary to perform service or sell products.</div>
+    </div>
+    <div class="term-card">
+      <div class="term-word">Profit (Net Income)</div>
+      <div class="term-def">Remaining revenues after subtracting all expenses. Revenues > Expenses. <strong>Increases equity.</strong></div>
+    </div>
+    <div class="term-card">
+      <div class="term-word">Loss (as a result)</div>
+      <div class="term-def">When Revenues < Expenses. The bottom line is negative. Decreases equity.</div>
+    </div>
+    <div class="term-card">
+      <div class="term-word">Gains</div>
+      <div class="term-def">Inflow from <strong>non-central / non-repeatable</strong> activities. Increases equity.</div>
+    </div>
+    <div class="term-card">
+      <div class="term-word">Loss (as an item)</div>
+      <div class="term-def">Expense from <strong>central / repeatable</strong> activities with <em>no benefits in return</em>. Goes inside income statement. Decreases equity.</div>
+    </div>
+    <div class="term-card">
+      <div class="term-word">Permanent Accounts</div>
+      <div class="term-def">Assets, Liabilities, Owner's Equity. Found in Balance Sheet. Carry over between periods.</div>
+    </div>
+    <div class="term-card">
+      <div class="term-word">Temporary/Nominal Accounts</div>
+      <div class="term-def">Revenues & Expenses. Found in Income Statement. Reset to zero at end of each period.</div>
+    </div>
+    <div class="term-card">
+      <div class="term-word">Responsibility Centers</div>
+      <div class="term-def">Units that a company is divided into in Responsibility Accounting. Each has a manager accountable only for items <strong>under their control</strong>.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     SECTION 8: FLASHCARDS
+════════════════════════════════ -->
+<section id="flashcards" style="background:var(--surface)">
+  <div class="sec-label">Section 08 · Flashcards</div>
+  <h2>Test Your <span style="color:var(--accent)">Memory</span></h2>
+  <p style="margin-bottom:2.5rem">Click the card to flip it. Use the arrows to navigate. Cover all 20 cards for max memory retention!</p>
+
+  <div class="fc-area">
+    <div class="fc-counter">Card <span id="fc-current">1</span> of <span id="fc-total">20</span></div>
+    <div class="fc-progress"><div class="fc-bar" id="fc-bar" style="width:5%"></div></div>
+    <div class="flashcard-wrap" id="flashcard" onclick="flipCard()">
+      <div class="flashcard-inner">
+        <div class="flashcard-face fc-front">
+          <div class="fc-q" id="fc-q">What are the 3 keywords in accounting's definition as a system?</div>
+          <div class="fc-hint">Click to reveal answer</div>
+        </div>
+        <div class="flashcard-face fc-back">
+          <div class="fc-a" id="fc-a">1. Quantitative Information (numbers only)<br>2. Financial Nature (monetary units)<br>3. Decision Making (ultimate goal)</div>
+        </div>
+      </div>
+    </div>
+    <div class="fc-controls">
+      <button class="fc-btn" onclick="prevCard()">← Prev</button>
+      <button class="fc-btn" onclick="flipCard()">Flip</button>
+      <button class="fc-btn" onclick="nextCard()">Next →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     SECTION 9: QUIZ
+════════════════════════════════ -->
+<section id="quiz">
+  <div class="sec-label">Section 09 · Exam Practice Quiz</div>
+  <h2>Can You Get <span style="color:var(--accent)">100%?</span> 🔥</h2>
+  <p style="margin-bottom:2.5rem">15 exam-style questions. Choose your answer and see instant feedback!</p>
+
+  <div class="quiz-area" id="quiz-area">
+    <!-- Questions rendered by JS -->
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     CHEATSHEET
+════════════════════════════════ -->
+<section id="cheatsheet">
+  <div class="sec-label">Section 10 · Quick Cheatsheet</div>
+  <h2>Exam <span style="color:var(--accent)">Cheatsheet</span></h2>
+  <p style="margin-bottom:2rem">The entire chapter in one table. Print it. Read it 3x before the exam.</p>
+
+  <div style="overflow-x:auto" class="reveal">
+    <table class="cheat-table">
+      <thead>
+        <tr>
+          <th>Topic</th>
+          <th>Key Points</th>
+          <th>Tool / Statement</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Accounting (System)</strong></td>
+          <td>Quantitative · Financial Nature · Decision Making</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><strong>Accounting (Process)</strong></td>
+          <td>Identify → Record (Journal) → Summarize (Ledger/Trial Balance) → Report</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><strong>Internal Users</strong></td>
+          <td>Management & Workers. Need detailed, financial & non-financial, historical & estimated info. Plan/Coordinate/Direct/Control</td>
+          <td>Internal Reports</td>
+        </tr>
+        <tr>
+          <td><strong>External Users</strong></td>
+          <td>Investors, Creditors, Suppliers, Customers, Workers Unions, Competitors, Gov't, Analysts, Public. Need total, historical, financial info.</td>
+          <td>General-Purpose Financial Statements</td>
+        </tr>
+        <tr>
+          <td><strong>Assets</strong></td>
+          <td>Economic benefits controlled by entity from past transactions. Permanent account.</td>
+          <td>Balance Sheet</td>
+        </tr>
+        <tr>
+          <td><strong>Liabilities</strong></td>
+          <td>Future sacrifices from current obligations from past transactions. Permanent account.</td>
+          <td>Balance Sheet</td>
+        </tr>
+        <tr>
+          <td><strong>Owner's Equity</strong></td>
+          <td>Assets − Liabilities. Capital + Net Income − Drawings. Permanent account.</td>
+          <td>Balance Sheet / OE Statement</td>
+        </tr>
+        <tr>
+          <td><strong>Revenue</strong></td>
+          <td>Price for selling/rendering services, regardless of collection. Temporary account.</td>
+          <td>Income Statement</td>
+        </tr>
+        <tr>
+          <td><strong>Expenses</strong></td>
+          <td>Cost of providing resources. Temporary account.</td>
+          <td>Income Statement</td>
+        </tr>
+        <tr>
+          <td><strong>Profit</strong></td>
+          <td>Revenue − Expenses > 0. Increases equity.</td>
+          <td>Income Statement</td>
+        </tr>
+        <tr>
+          <td><strong>Gains</strong></td>
+          <td>Non-central/non-repeatable activities. Increases equity.</td>
+          <td>Income Statement</td>
+        </tr>
+        <tr>
+          <td><strong>Loss (item)</strong></td>
+          <td>Central activity, no benefit. Is an expense. Decreases equity.</td>
+          <td>Income Statement</td>
+        </tr>
+        <tr>
+          <td><strong>Corporation Characteristics</strong></td>
+          <td>Unlimited fundraising · Flexible capital transfer · Continuity · Separate legal entity</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><strong>Auditing</strong></td>
+          <td>Examine internal controls + review records → collect evidence → professional opinion on fairness of statements</td>
+          <td>Audit Report</td>
+        </tr>
+        <tr>
+          <td><strong>Responsibility Accounting</strong></td>
+          <td>Divide company into Responsibility Centers. Manager accountable for items under their control only. Evaluate via variances.</td>
+          <td>Internal Reports</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<footer>
+  <div>Built for exam success 🏆 · Chapter 1 · Accounting Principles 1 · Dr. Hamdy Habl</div>
+  <div style="margin-top:.5rem">Study hard · You've got this · <span>💯</span></div>
+</footer>
+
+<script>
+// ─── PROGRESS BAR ───
+window.addEventListener('scroll', () => {
+  const doc = document.documentElement;
+  const pct = (doc.scrollTop / (doc.scrollHeight - doc.clientHeight)) * 100;
+  document.getElementById('progress-bar').style.width = pct + '%';
+});
+
+// ─── REVEAL ON SCROLL ───
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+reveals.forEach(r => observer.observe(r));
+
+// ─── NAV ACTIVE ───
+function setActive(el) {
+  document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// ─── TABS ───
+function switchTab(btn, id) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(id).classList.add('active');
+}
+
+// ─── ACCORDION ───
+function toggleAcc(header) {
+  const item = header.parentElement;
+  item.classList.toggle('open');
+}
+
+// ─── FLASHCARDS ───
+const flashcardsData = [
+  { q: "What are the 3 keywords in accounting's definition as a system?", a: "1. Quantitative Information (numbers only)\n2. Financial Nature (monetary units)\n3. Decision Making (ultimate goal)" },
+  { q: "What are the 4 steps of accounting as a process?", a: "1. Identifying (analyze transactions)\n2. Recording / Journalizing\n3. Summarizing (Ledger + Trial Balance)\n4. Reporting (financial statements)" },
+  { q: "What is Summarizing in the accounting process?", a: "Transferring and classifying transactions into the ledger AND making the Trial Balance." },
+  { q: "Name the 4 General-Purpose Financial Statements.", a: "1. Statement of Financial Position (Balance Sheet)\n2. Income Statement\n3. Statement of Owners' Equity\n4. Statement of Cash Flow" },
+  { q: "What do Internal Users need and who are they?", a: "Need: Detailed, financial & non-financial, historical & estimated info.\nFor: Planning, Coordinating, Directing, Controlling.\nWho: Management + Employees" },
+  { q: "What is the difference between current and potential investors?", a: "Current: Already invested — decide to stay or exit based on cash flows.\nPotential: Have money to invest — compare alternatives to find best opportunity." },
+  { q: "Define Assets.", a: "Expected economic benefits controlled by the entity as a result of past transactions." },
+  { q: "Define Liabilities.", a: "Future economic sacrifices resulting from current obligations to transfer or render service to other entities in the future, as a result of past transactions or events." },
+  { q: "What is Owner's Equity?", a: "The remaining of assets after subtracting all liabilities.\nFormula: OE = Assets − Liabilities" },
+  { q: "What are Permanent / Real Accounts?", a: "Assets, Liabilities, Owner's Equity — found in the Balance Sheet. They carry forward between accounting periods." },
+  { q: "What are Temporary / Nominal Accounts?", a: "Revenues and Expenses — found in the Income Statement. They reset to zero at the end of each accounting period." },
+  { q: "What is the difference between Gains and Losses (as items)?", a: "Gains: Non-central/non-repeatable activities → increases equity.\nLoss (as item): Central/repeatable activities with NO benefit in return → it's an expense → decreases equity." },
+  { q: "What is Tax Planning?", a: "Trying to reduce the amount of taxes to the minimum OR maximize the use of exemptions and tax credits." },
+  { q: "What does an Auditor do and what is their responsibility?", a: "1. Examines internal control system\n2. Reviews documents, records, financial statements\n→ Gives professional opinion on FAIRNESS of statements.\n→ Is responsible for any NEGLIGENCE in their audit." },
+  { q: "What is a Responsibility Center?", a: "A unit of a company in Responsibility Accounting. Each has a manager who is accountable ONLY for revenues and expenses under their control and authority." },
+  { q: "What are the 4 characteristics of a Corporation?", a: "1. Unlimited ability to raise funds\n2. Flexibility of capital transfer\n3. Continuity\n4. Separate legal entity" },
+  { q: "How many partners can a Partnership have?", a: "More than one and up to a maximum of 20 partners. Each unlimited partner is considered a manager." },
+  { q: "What are the 2 cost systems in Cost Accounting?", a: "1. Actual Cost System\n2. Predetermined Cost System\n(If predetermined: compare actual vs. predetermined → find variances → take corrective action)" },
+  { q: "What are the 2 functions of Budgeting?", a: "1. Planning: Translate company goals into numbers (certified plan).\n2. Controlling: Compare actual results to planned → evaluate performance → corrective actions." },
+  { q: "Why do Creditors & Banks need accounting information?", a: "To evaluate the firm's ability to REPAY its loans and debts (based on financial position)." },
+];
+
+let fcIndex = 0;
+let flipped = false;
+
+function renderCard() {
+  const card = flashcardsData[fcIndex];
+  document.getElementById('fc-q').textContent = card.q;
+  document.getElementById('fc-a').innerText = card.a;
+  document.getElementById('fc-current').textContent = fcIndex + 1;
+  document.getElementById('fc-total').textContent = flashcardsData.length;
+  document.getElementById('fc-bar').style.width = ((fcIndex + 1) / flashcardsData.length * 100) + '%';
+  const wrap = document.getElementById('flashcard');
+  wrap.classList.remove('flipped');
+  flipped = false;
+}
+
+function flipCard() {
+  const wrap = document.getElementById('flashcard');
+  flipped = !flipped;
+  wrap.classList.toggle('flipped', flipped);
+}
+
+function nextCard() {
+  fcIndex = (fcIndex + 1) % flashcardsData.length;
+  renderCard();
+}
+
+function prevCard() {
+  fcIndex = (fcIndex - 1 + flashcardsData.length) % flashcardsData.length;
+  renderCard();
+}
+
+renderCard();
+
+// ─── QUIZ ───
+const quizData = [
+  {
+    q: "Accounting as a System is defined as providing _____ information with _____ nature to help in _____.",
+    opts: ["qualitative, non-financial, planning", "quantitative, financial, decision making", "numerical, physical, controlling", "detailed, monetary, reporting"],
+    ans: 1,
+    exp: "The three keywords: Quantitative (numbers) + Financial Nature (monetary) + Decision Making (final goal)."
+  },
+  {
+    q: "What is the CORRECT order of the accounting process?",
+    opts: ["Recording → Identifying → Summarizing → Reporting", "Identifying → Summarizing → Recording → Reporting", "Identifying → Recording → Summarizing → Reporting", "Summarizing → Recording → Identifying → Reporting"],
+    ans: 2,
+    exp: "I-R-S-R: Identify → Record (Journal) → Summarize (Ledger/Trial Balance) → Report."
+  },
+  {
+    q: "Which of the following is an example of an Internal Report?",
+    opts: ["Income Statement", "Statement of Cash Flow", "Budget", "Statement of Financial Position"],
+    ans: 2,
+    exp: "Budgets, Cost Statements, Performance Evaluation Reports, and Responsibility Reports are internal. The other three are General-Purpose Financial Statements (external)."
+  },
+  {
+    q: "Assets are defined as:",
+    opts: ["Current obligations to transfer service in the future", "Expected economic benefits controlled by the entity as a result of past transactions", "The remaining of assets after subtracting liabilities", "Inflows from non-repeatable activities"],
+    ans: 1,
+    exp: "Assets = Expected economic benefits, controlled by the entity, from past transactions."
+  },
+  {
+    q: "What are Permanent / Real accounts?",
+    opts: ["Revenues and Expenses only", "Assets, Liabilities, and Owner's Equity", "Cash, Inventory, and Capital", "Revenues, Expenses, and Gains"],
+    ans: 1,
+    exp: "Permanent accounts are Assets, Liabilities, and Owner's Equity — found in the Balance Sheet. They do NOT reset each period."
+  },
+  {
+    q: "A company sells old equipment (not its main business). The profit from this sale is called:",
+    opts: ["Revenue", "Expense", "Gain", "Loss as an item"],
+    ans: 2,
+    exp: "Gains come from non-central / non-repeatable activities (like selling old equipment). Revenue comes from central, repeatable activities."
+  },
+  {
+    q: "Which accounting field helps in determining taxable income and tax planning?",
+    opts: ["Financial Accounting", "Auditing", "Tax Accounting", "Governmental Accounting"],
+    ans: 2,
+    exp: "Tax Accounting handles taxable income, taxes to be paid, and tax planning (minimizing taxes legally)."
+  },
+  {
+    q: "A corporation is DIFFERENT from a proprietorship because:",
+    opts: ["A corporation has one owner only", "Owners of a corporation have unlimited liability", "A corporation is legally separate from its owners", "A corporation cannot raise funds from outside"],
+    ans: 2,
+    exp: "Corporations have: limited liability for shareholders, separate legal entity, unlimited shareholders, and flexible capital transfer."
+  },
+  {
+    q: "Creditors and Banks use accounting information to:",
+    opts: ["Plan their internal budgets", "Evaluate the firm's ability to repay its loans and debts", "Know how many workers the company will hire", "Determine their share in profits"],
+    ans: 1,
+    exp: "Creditors & Banks need to assess the financial position → can this firm repay us?"
+  },
+  {
+    q: "In Responsibility Accounting, a manager is evaluated based on:",
+    opts: ["All revenues and expenses of the whole company", "Only the revenues under his control", "Variances resulting from decisions under his control and authority", "The company's total net income"],
+    ans: 2,
+    exp: "Manager → accountable ONLY for items under their control. Evaluation = variances from their own decisions."
+  },
+  {
+    q: "The accounting equation is:",
+    opts: ["Assets = Liabilities − Owner's Equity", "Assets = Liabilities + Owner's Equity", "Owner's Equity = Assets + Liabilities", "Liabilities = Assets + Owner's Equity"],
+    ans: 1,
+    exp: "THE fundamental equation: Assets = Liabilities + Owner's Equity. This MUST be memorized."
+  },
+  {
+    q: "Which of the following is a Temporary / Nominal Account?",
+    opts: ["Land", "Accounts Payable", "Sales Revenue", "Owner's Capital"],
+    ans: 2,
+    exp: "Temporary/Nominal accounts = Revenues & Expenses. They go into the Income Statement and reset each period."
+  },
+  {
+    q: "Summarizing in the accounting process involves:",
+    opts: ["Writing transactions in the journal", "Preparing the income statement", "Transferring to the ledger, classifying, and making the Trial Balance", "Analyzing transactions to separate financial from non-financial"],
+    ans: 2,
+    exp: "Summarizing = Ledger + Trial Balance. Recording = Journal. Identifying = analysis. Reporting = statements."
+  },
+  {
+    q: "International Accounting is mainly concerned with:",
+    opts: ["Preparing budgets for government units", "Foreign currencies, multinational companies, and harmonizing standards", "Dividing companies into responsibility centers", "Determining taxable income"],
+    ans: 1,
+    exp: "International Accounting: foreign currencies, exchange rates, multinational companies, translation of foreign statements, harmonization."
+  },
+  {
+    q: "A Partnership can have a maximum of:",
+    opts: ["5 partners", "10 partners", "20 partners", "Unlimited partners"],
+    ans: 2,
+    exp: "Partnership: more than one owner, UP TO 20 partners. Corporations have unlimited shareholders."
+  },
+];
+
+let quizAnswered = new Array(quizData.length).fill(null);
+
+function buildQuiz() {
+  const area = document.getElementById('quiz-area');
+  area.innerHTML = '';
+  quizData.forEach((q, qi) => {
+    const box = document.createElement('div');
+    box.className = 'q-box';
+    box.id = `q-${qi}`;
+    const letters = ['A','B','C','D'];
+    box.innerHTML = `
+      <div class="q-num">Question ${qi+1} of ${quizData.length}</div>
+      <div class="q-text">${q.q}</div>
+      <div class="q-options">
+        ${q.opts.map((opt,oi)=>`
+          <button class="q-opt" onclick="selectAnswer(${qi},${oi},this)" id="opt-${qi}-${oi}">
+            <span class="opt-letter">${letters[oi]}</span>${opt}
+          </button>
+        `).join('')}
+      </div>
+      <div class="q-feedback" id="fb-${qi}"></div>
+    `;
+    area.appendChild(box);
+  });
+  const scoreEl = document.createElement('div');
+  scoreEl.className = 'quiz-score';
+  scoreEl.id = 'quiz-score';
+  scoreEl.innerHTML = `<div style="font-size:.8rem;color:var(--muted);margin-bottom:.5rem">YOUR SCORE</div><div class="score-big" id="score-num">0 / ${quizData.length}</div><div style="font-size:.8rem;color:var(--muted);margin-top:.75rem" id="score-msg"></div>`;
+  area.appendChild(scoreEl);
+}
+
+function selectAnswer(qi, oi, btn) {
+  if(quizAnswered[qi] !== null) return;
+  quizAnswered[qi] = oi;
+  const q = quizData[qi];
+  const opts = btn.parentElement.querySelectorAll('.q-opt');
+  opts.forEach(o => o.classList.add('disabled'));
+  opts[q.ans].classList.add('correct');
+  const fb = document.getElementById(`fb-${qi}`);
+  if(oi === q.ans) {
+    btn.classList.add('correct');
+    fb.className = 'q-feedback show correct-fb';
+    fb.innerHTML = '✅ Correct! ' + q.exp;
+  } else {
+    btn.classList.add('wrong');
+    fb.className = 'q-feedback show wrong-fb';
+    fb.innerHTML = '❌ Wrong. ' + q.exp;
+  }
+  checkAllAnswered();
+}
+
+function checkAllAnswered() {
+  const done = quizAnswered.filter(a => a !== null).length;
+  if(done === quizData.length) {
+    const correct = quizAnswered.filter((a,i) => a === quizData[i].ans).length;
+    const scoreEl = document.getElementById('quiz-score');
+    scoreEl.style.display = 'block';
+    document.getElementById('score-num').textContent = `${correct} / ${quizData.length}`;
+    const pct = (correct/quizData.length)*100;
+    let msg = pct === 100 ? '🏆 PERFECT SCORE! You are UNSTOPPABLE!' :
+              pct >= 80  ? '🔥 Excellent! Almost there!' :
+              pct >= 60  ? '💪 Good. Review the wrong ones and you\'ll ace it.' :
+                           '📚 Keep studying! You will get there.';
+    document.getElementById('score-msg').textContent = msg;
+    scoreEl.scrollIntoView({behavior:'smooth', block:'center'});
+  }
+}
+
+buildQuiz();
+</script>
+</body>
+</html>
