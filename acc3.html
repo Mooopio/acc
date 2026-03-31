@@ -1,0 +1,1813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accounting Ch.3 — Exam Beast Mode 🔥</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --bg2: #12121a;
+    --bg3: #1a1a26;
+    --accent: #00f5a0;
+    --accent2: #00d4ff;
+    --accent3: #ff6b35;
+    --accent4: #ffd700;
+    --danger: #ff4757;
+    --purple: #a855f7;
+    --text: #e8e8f0;
+    --text2: #9999bb;
+    --card: #16162a;
+    --border: #2a2a45;
+    --glow: 0 0 20px rgba(0,245,160,0.3);
+    --glow2: 0 0 20px rgba(0,212,255,0.3);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(0,245,160,0.08) 0%, transparent 70%);
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    animation: pulse 4s ease-in-out infinite;
+  }
+
+  @keyframes pulse { 0%,100%{opacity:.5;transform:translate(-50%,-50%) scale(1)} 50%{opacity:1;transform:translate(-50%,-50%) scale(1.2)} }
+
+  .hero-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: .75rem;
+    color: var(--accent);
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp .6s .2s forwards;
+  }
+
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 800;
+    line-height: 1.0;
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: fadeUp .6s .4s forwards;
+  }
+
+  .hero h1 span { color: var(--accent); }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--text2);
+    max-width: 500px;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp .6s .6s forwards;
+  }
+
+  .nav-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+    justify-content: center;
+    opacity: 0;
+    animation: fadeUp .6s .8s forwards;
+  }
+
+  .pill {
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--text2);
+    padding: .5rem 1.25rem;
+    border-radius: 50px;
+    font-size: .85rem;
+    cursor: pointer;
+    transition: all .25s;
+    font-family: 'Space Mono', monospace;
+  }
+
+  .pill:hover, .pill.active {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+    box-shadow: var(--glow);
+    transform: translateY(-2px);
+  }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+  /* ─── MAIN LAYOUT ─── */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  section {
+    padding: 5rem 0;
+    display: none;
+  }
+
+  section.active { display: block; }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    margin-bottom: .5rem;
+  }
+
+  .section-title span { color: var(--accent); }
+
+  .section-sub {
+    color: var(--text2);
+    margin-bottom: 3rem;
+    font-size: 1rem;
+  }
+
+  /* ─── CARDS ─── */
+  .grid { display: grid; gap: 1.5rem; }
+  .grid-2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .grid-3 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.75rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform .25s, border-color .25s, box-shadow .25s;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+    box-shadow: var(--glow);
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+  }
+
+  .card.red::before { background: linear-gradient(90deg, var(--danger), var(--accent3)); }
+  .card.purple::before { background: linear-gradient(90deg, var(--purple), var(--accent2)); }
+  .card.gold::before { background: linear-gradient(90deg, var(--accent4), var(--accent3)); }
+
+  .card-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: .75rem;
+    color: var(--accent);
+  }
+
+  .card.red h3 { color: var(--danger); }
+  .card.purple h3 { color: var(--purple); }
+  .card.gold h3 { color: var(--accent4); }
+
+  .card p, .card li {
+    color: var(--text2);
+    font-size: .9rem;
+    line-height: 1.7;
+  }
+
+  .card ul { padding-left: 1.2rem; }
+  .card li { margin-bottom: .35rem; }
+  .card li strong { color: var(--text); }
+
+  /* ─── CYCLE STEPS ─── */
+  .cycle-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .cycle-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+    position: relative;
+    padding-bottom: 2rem;
+  }
+
+  .cycle-step:last-child { padding-bottom: 0; }
+
+  .step-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 50px;
+  }
+
+  .step-num {
+    width: 50px; height: 50px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    font-size: 1rem;
+    flex-shrink: 0;
+    box-shadow: var(--glow);
+    z-index: 1;
+  }
+
+  .step-line {
+    width: 2px;
+    flex: 1;
+    background: linear-gradient(var(--accent), transparent);
+    min-height: 40px;
+    margin-top: 4px;
+  }
+
+  .step-content {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    flex: 1;
+    transition: border-color .25s;
+  }
+
+  .step-content:hover { border-color: var(--accent); }
+
+  .step-content h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: .5rem;
+  }
+
+  .step-content p {
+    color: var(--text2);
+    font-size: .875rem;
+    line-height: 1.65;
+  }
+
+  /* ─── T-ACCOUNT ─── */
+  .t-account-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .t-account {
+    width: 100%;
+    max-width: 550px;
+    border: 2px solid var(--accent);
+    border-radius: 12px;
+    overflow: hidden;
+    font-family: 'Space Mono', monospace;
+    font-size: .85rem;
+  }
+
+  .t-account-header {
+    background: var(--accent);
+    color: var(--bg);
+    text-align: center;
+    padding: .75rem;
+    font-weight: 700;
+    font-size: 1rem;
+    font-family: 'Syne', sans-serif;
+  }
+
+  .t-account-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .t-side {
+    padding: 1rem;
+  }
+
+  .t-side:first-child {
+    border-right: 2px solid var(--accent);
+  }
+
+  .t-side-label {
+    font-weight: 700;
+    margin-bottom: .75rem;
+    font-size: .8rem;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: var(--text2);
+  }
+
+  .t-row {
+    display: flex;
+    justify-content: space-between;
+    padding: .3rem 0;
+    border-bottom: 1px solid var(--border);
+    color: var(--text2);
+  }
+
+  .t-row:last-child { border-bottom: none; }
+  .t-row.total { color: var(--accent); font-weight: 700; border-top: 2px solid var(--accent); border-bottom: none; margin-top: .5rem; }
+  .t-row.balance { color: var(--accent4); font-weight: 700; }
+
+  /* ─── JOURNAL TABLE ─── */
+  .journal-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .85rem;
+    font-family: 'Space Mono', monospace;
+  }
+
+  .journal-table th {
+    background: var(--bg3);
+    color: var(--accent);
+    padding: .85rem 1rem;
+    text-align: left;
+    font-size: .75rem;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    border-bottom: 2px solid var(--accent);
+  }
+
+  .journal-table td {
+    padding: .7rem 1rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--text2);
+    vertical-align: top;
+  }
+
+  .journal-table tr:hover td { background: var(--bg3); }
+
+  .debit-row td:first-child { color: var(--text); font-weight: 500; }
+  .credit-row td:nth-child(2) { padding-left: 2rem; color: var(--accent2); font-style: italic; }
+
+  .amount-dr { color: var(--accent); font-weight: 700; }
+  .amount-cr { color: var(--accent2); font-weight: 700; }
+
+  /* ─── TRIAL BALANCE ─── */
+  .tb-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .875rem;
+    font-family: 'Space Mono', monospace;
+  }
+
+  .tb-table th {
+    background: var(--bg3);
+    padding: .85rem 1rem;
+    font-size: .75rem;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .tb-table th:first-child { color: var(--text); text-align: left; }
+  .tb-table th:nth-child(2) { color: var(--accent); text-align: right; }
+  .tb-table th:nth-child(3) { color: var(--accent2); text-align: right; }
+
+  .tb-table td {
+    padding: .65rem 1rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--text2);
+  }
+
+  .tb-table td:nth-child(2), .tb-table td:nth-child(3) { text-align: right; font-weight: 600; }
+  .tb-table td:nth-child(2) { color: var(--accent); }
+  .tb-table td:nth-child(3) { color: var(--accent2); }
+
+  .tb-table tr.category-header td {
+    background: var(--bg3);
+    color: var(--purple);
+    font-weight: 700;
+    font-size: .8rem;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    padding: .5rem 1rem;
+  }
+
+  .tb-table tr.total-row td {
+    border-top: 2px solid var(--accent);
+    color: var(--accent4);
+    font-weight: 700;
+    font-size: 1rem;
+    padding-top: 1rem;
+  }
+
+  /* ─── CLOSING ENTRIES ─── */
+  .closing-block {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.25rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .closing-block::before {
+    content: attr(data-step);
+    position: absolute;
+    top: 1rem; right: 1.25rem;
+    font-family: 'Space Mono', monospace;
+    font-size: .7rem;
+    color: var(--text2);
+    opacity: .5;
+  }
+
+  .closing-block h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  .closing-block h4.step1 { color: var(--accent); }
+  .closing-block h4.step2 { color: var(--danger); }
+  .closing-block h4.step3 { color: var(--accent4); }
+  .closing-block h4.step4 { color: var(--purple); }
+
+  .closing-entry {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: .25rem;
+    font-family: 'Space Mono', monospace;
+    font-size: .82rem;
+  }
+
+  .ce-row { display: contents; }
+
+  .ce-row span:first-child { color: var(--text); padding: .2rem 0; }
+  .ce-row.credit span:first-child { padding-left: 2rem; color: var(--text2); font-style: italic; }
+  .ce-row span:nth-child(2) { color: var(--accent); text-align: right; }
+  .ce-row span:nth-child(3) { color: var(--accent2); text-align: right; }
+
+  .ce-separator {
+    grid-column: 1/-1;
+    height: 1px;
+    background: var(--border);
+    margin: .5rem 0;
+  }
+
+  /* ─── TRICKS / MNEMONICS ─── */
+  .trick-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.75rem;
+    margin-bottom: 1.25rem;
+    position: relative;
+    overflow: hidden;
+    transition: all .25s;
+  }
+
+  .trick-card:hover { transform: translateY(-3px); box-shadow: var(--glow2); border-color: var(--accent2); }
+
+  .trick-tag {
+    display: inline-block;
+    background: rgba(0,212,255,.15);
+    color: var(--accent2);
+    border: 1px solid rgba(0,212,255,.3);
+    border-radius: 50px;
+    font-size: .72rem;
+    font-family: 'Space Mono', monospace;
+    padding: .25rem .75rem;
+    margin-bottom: .85rem;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+  }
+
+  .trick-tag.fire { background: rgba(255,107,53,.15); color: var(--accent3); border-color: rgba(255,107,53,.3); }
+  .trick-tag.gold { background: rgba(255,215,0,.1); color: var(--accent4); border-color: rgba(255,215,0,.25); }
+
+  .trick-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: .75rem;
+    color: var(--text);
+  }
+
+  .trick-card p, .trick-card li {
+    color: var(--text2);
+    font-size: .9rem;
+    line-height: 1.7;
+  }
+
+  .highlight {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .highlight2 { color: var(--accent2); font-weight: 600; }
+  .highlight3 { color: var(--accent3); font-weight: 600; }
+  .highlight4 { color: var(--accent4); font-weight: 600; }
+  .highlight-danger { color: var(--danger); font-weight: 600; }
+
+  .mega-rule {
+    background: linear-gradient(135deg, rgba(0,245,160,.08), rgba(0,212,255,.05));
+    border: 2px solid var(--accent);
+    border-radius: 16px;
+    padding: 2rem;
+    margin: 2rem 0;
+    text-align: center;
+  }
+
+  .mega-rule .rule-text {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.2rem, 2.5vw, 1.75rem);
+    font-weight: 800;
+    line-height: 1.4;
+  }
+
+  /* ─── QUIZ ─── */
+  .quiz-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    transition: border-color .25s;
+  }
+
+  .quiz-box.correct { border-color: var(--accent); background: rgba(0,245,160,.05); }
+  .quiz-box.wrong { border-color: var(--danger); background: rgba(255,71,87,.05); }
+
+  .quiz-q {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+    line-height: 1.5;
+  }
+
+  .quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: .6rem;
+  }
+
+  .quiz-opt {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: .85rem 1.25rem;
+    cursor: pointer;
+    font-size: .9rem;
+    transition: all .2s;
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+  }
+
+  .quiz-opt:hover { border-color: var(--accent2); color: var(--text); }
+  .quiz-opt.correct-ans { border-color: var(--accent); background: rgba(0,245,160,.1); color: var(--accent); }
+  .quiz-opt.wrong-ans { border-color: var(--danger); background: rgba(255,71,87,.1); color: var(--danger); }
+
+  .opt-letter {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Space Mono', monospace;
+    font-size: .75rem;
+    flex-shrink: 0;
+    transition: background .2s;
+  }
+
+  .quiz-opt.correct-ans .opt-letter { background: var(--accent); color: var(--bg); }
+  .quiz-opt.wrong-ans .opt-letter { background: var(--danger); color: white; }
+
+  .quiz-feedback {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 10px;
+    font-size: .875rem;
+    line-height: 1.6;
+    display: none;
+  }
+
+  .quiz-feedback.show { display: block; }
+  .quiz-feedback.correct-fb { background: rgba(0,245,160,.1); color: var(--accent); border: 1px solid rgba(0,245,160,.3); }
+  .quiz-feedback.wrong-fb { background: rgba(255,71,87,.1); color: var(--danger); border: 1px solid rgba(255,71,87,.3); }
+
+  .quiz-score {
+    text-align: center;
+    background: var(--card);
+    border: 2px solid var(--accent);
+    border-radius: 16px;
+    padding: 2.5rem;
+    margin-top: 2rem;
+    display: none;
+  }
+
+  .quiz-score.show { display: block; }
+
+  .score-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 5rem;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: .5rem;
+  }
+
+  /* ─── COMPARISON TABLE ─── */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .875rem;
+    overflow: hidden;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+  }
+
+  .compare-table th {
+    padding: 1rem 1.25rem;
+    font-family: 'Space Mono', monospace;
+    font-size: .75rem;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+  }
+
+  .compare-table th:first-child { background: var(--bg3); color: var(--text2); text-align: left; }
+  .compare-table th:nth-child(2) { background: rgba(0,245,160,.1); color: var(--accent); text-align: center; }
+  .compare-table th:nth-child(3) { background: rgba(0,212,255,.1); color: var(--accent2); text-align: center; }
+  .compare-table th:nth-child(4) { background: rgba(168,85,247,.1); color: var(--purple); text-align: center; }
+
+  .compare-table td {
+    padding: .9rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--text2);
+  }
+
+  .compare-table td:first-child { font-weight: 600; color: var(--text); }
+  .compare-table td:nth-child(2), .compare-table td:nth-child(3), .compare-table td:nth-child(4) { text-align: center; }
+
+  .compare-table tr:hover td { background: var(--bg3); }
+
+  /* ─── FORMULA BOX ─── */
+  .formula {
+    background: linear-gradient(135deg, rgba(168,85,247,.08), rgba(0,212,255,.05));
+    border: 1px solid rgba(168,85,247,.4);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    margin: 1.25rem 0;
+    text-align: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--purple);
+    line-height: 1.8;
+  }
+
+  /* ─── CHEAT SHEET ─── */
+  .cheat-row {
+    display: flex;
+    align-items: stretch;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .cheat-row:last-child { border-bottom: none; }
+
+  .cheat-account {
+    padding: .9rem 1.25rem;
+    font-weight: 600;
+    color: var(--text);
+    min-width: 160px;
+    display: flex;
+    align-items: center;
+    font-family: 'Space Mono', monospace;
+    font-size: .85rem;
+  }
+
+  .cheat-dr, .cheat-cr {
+    padding: .9rem 1.25rem;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    font-size: .85rem;
+  }
+
+  .cheat-dr { background: rgba(0,245,160,.04); color: var(--accent); }
+  .cheat-cr { background: rgba(0,212,255,.04); color: var(--accent2); }
+
+  /* ─── STICKY NAV ─── */
+  .sticky-nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: rgba(10,10,15,.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: .75rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+    transform: translateY(-100%);
+    transition: transform .3s;
+  }
+
+  .sticky-nav.visible { transform: translateY(0); }
+
+  .sticky-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--accent);
+  }
+
+  .sticky-pills {
+    display: flex;
+    gap: .5rem;
+    flex-wrap: wrap;
+  }
+
+  .sticky-pill {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text2);
+    padding: .35rem .85rem;
+    border-radius: 50px;
+    font-size: .75rem;
+    cursor: pointer;
+    transition: all .2s;
+    font-family: 'Space Mono', monospace;
+  }
+
+  .sticky-pill:hover, .sticky-pill.active {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+  }
+
+  /* ─── BADGE ─── */
+  .badge {
+    display: inline-block;
+    padding: .2rem .65rem;
+    border-radius: 50px;
+    font-size: .7rem;
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    margin-left: .5rem;
+  }
+
+  .badge-dr { background: rgba(0,245,160,.15); color: var(--accent); }
+  .badge-cr { background: rgba(0,212,255,.15); color: var(--accent2); }
+  .badge-important { background: rgba(255,107,53,.15); color: var(--accent3); }
+
+  /* ─── ALERT ─── */
+  .alert {
+    display: flex;
+    gap: 1rem;
+    background: rgba(255,215,0,.06);
+    border: 1px solid rgba(255,215,0,.25);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 0;
+    align-items: flex-start;
+  }
+
+  .alert-icon { font-size: 1.5rem; flex-shrink: 0; }
+
+  .alert-text { color: var(--text2); font-size: .9rem; line-height: 1.65; }
+  .alert-text strong { color: var(--accent4); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 640px) {
+    .closing-entry { grid-template-columns: 1fr; font-size: .78rem; }
+    .ce-row span:nth-child(2), .ce-row span:nth-child(3) { text-align: left; }
+    .cheat-account { min-width: 100px; font-size: .75rem; }
+    .sticky-pills { display: none; }
+    .t-account { font-size: .75rem; }
+  }
+
+  /* ─── SCROLL REVEAL ─── */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .5s, transform .5s; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── HERO GRID PATTERN ─── */
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(rgba(0,245,160,.03) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(0,245,160,.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+
+  .floating-btn {
+    position: fixed;
+    bottom: 2rem; right: 2rem;
+    background: var(--accent);
+    color: var(--bg);
+    border: none;
+    padding: .85rem 1.5rem;
+    border-radius: 50px;
+    font-family: 'Space Mono', monospace;
+    font-size: .8rem;
+    font-weight: 700;
+    cursor: pointer;
+    z-index: 999;
+    box-shadow: var(--glow);
+    transition: transform .2s;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    display: none;
+  }
+
+  .floating-btn:hover { transform: scale(1.05); }
+
+  .progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    z-index: 2000;
+    transition: width .1s;
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- STICKY NAV -->
+<nav class="sticky-nav" id="stickyNav">
+  <div class="sticky-logo">ACC Ch.3 🔥</div>
+  <div class="sticky-pills">
+    <button class="sticky-pill active" onclick="showSection('cycle')">Cycle</button>
+    <button class="sticky-pill" onclick="showSection('journal')">Journal</button>
+    <button class="sticky-pill" onclick="showSection('ledger')">Ledger</button>
+    <button class="sticky-pill" onclick="showSection('trial')">Trial Balance</button>
+    <button class="sticky-pill" onclick="showSection('closing')">Closing</button>
+    <button class="sticky-pill" onclick="showSection('tricks')">Tricks</button>
+    <button class="sticky-pill" onclick="showSection('quiz')">Quiz 🎯</button>
+  </div>
+</nav>
+
+<button class="floating-btn" id="floatingBtn" onclick="showSection('quiz')">Quiz Me! 🎯</button>
+
+<!-- ─── HERO ─── -->
+<div class="hero" id="heroSection">
+  <div class="hero-grid"></div>
+  <p class="hero-tag">Accounting Principles I — Chapter 3</p>
+  <h1>Simple<br><span>Accounting</span><br>Cycle</h1>
+  <p class="hero-sub">The ultimate exam survival guide. Every concept, every entry, every trick. You got this. 💪</p>
+  <div class="nav-pills">
+    <button class="pill active" onclick="showSection('cycle')">🔄 The Cycle</button>
+    <button class="pill" onclick="showSection('journal')">📝 Journal</button>
+    <button class="pill" onclick="showSection('ledger')">📚 Ledger</button>
+    <button class="pill" onclick="showSection('trial')">⚖️ Trial Balance</button>
+    <button class="pill" onclick="showSection('closing')">🔒 Closing</button>
+    <button class="pill" onclick="showSection('tricks')">🧠 Tricks</button>
+    <button class="pill" onclick="showSection('quiz')">🎯 Quiz</button>
+  </div>
+</div>
+
+<!-- ─── SECTION: CYCLE ─── -->
+<section id="cycle" class="active">
+  <div class="container">
+    <p class="section-title">The <span>Accounting Cycle</span></p>
+    <p class="section-sub">6 steps — memorize them IN ORDER. They always come in the exam.</p>
+
+    <div class="cycle-wrap">
+
+      <div class="cycle-step reveal">
+        <div class="step-left">
+          <div class="step-num">1</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-content">
+          <h3>🔍 Identify Transactions & Events</h3>
+          <p>Look at what happened — did money move? Did the company buy, sell, borrow, or pay? If yes → it must be recorded. <strong>Not every event is a transaction</strong> (e.g. signing a contract with no money exchange yet is NOT recorded).</p>
+        </div>
+      </div>
+
+      <div class="cycle-step reveal">
+        <div class="step-left">
+          <div class="step-num">2</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-content">
+          <h3>📝 Recording in Journal (Journalizing)</h3>
+          <p>Write every transaction in chronological order in the <strong>General Journal</strong>. Always: <span style="color:var(--accent)">DEBIT first</span>, then <span style="color:var(--accent2)">CREDIT indented below</span>. Debits = Credits always.</p>
+        </div>
+      </div>
+
+      <div class="cycle-step reveal">
+        <div class="step-left">
+          <div class="step-num">3</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-content">
+          <h3>📤 Posting to Ledger (Transferring)</h3>
+          <p>Transfer each journal entry to its individual <strong>T-Account</strong> in the Ledger. The ledger shows the running balance of every account separately.</p>
+        </div>
+      </div>
+
+      <div class="cycle-step reveal">
+        <div class="step-left">
+          <div class="step-num">4</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-content">
+          <h3>⚖️ Preparing Trial Balance</h3>
+          <p>List ALL accounts with their closing balances. Total Debits <strong>MUST EQUAL</strong> Total Credits. If not equal → you made an error somewhere. This checks math, NOT correctness of entries.</p>
+        </div>
+      </div>
+
+      <div class="cycle-step reveal">
+        <div class="step-left">
+          <div class="step-num">5</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-content">
+          <h3>📊 Preparing Financial Statements</h3>
+          <p>Use the trial balance to prepare: <span class="highlight">Income Statement</span> → <span class="highlight2">Statement of Financial Position (Balance Sheet)</span>. Income Statement first because you need Net Income for the Balance Sheet.</p>
+        </div>
+      </div>
+
+      <div class="cycle-step reveal">
+        <div class="step-left">
+          <div class="step-num">6</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-content">
+          <h3>🔒 Closing Temporary Accounts</h3>
+          <p>Close <strong>Revenue, Expenses, Gains, Losses, Drawings</strong> to zero them out for the new period. Use "Income Summary" as a bridge account. Permanent accounts (Assets, Liabilities, Capital) are NEVER closed.</p>
+        </div>
+      </div>
+
+      <div class="cycle-step reveal">
+        <div class="step-left">
+          <div class="step-num">7</div>
+        </div>
+        <div class="step-content">
+          <h3>✅ After-Closing Trial Balance</h3>
+          <p>Final check — only permanent accounts remain (Assets, Liabilities, Capital). Temporary accounts should all show <strong>zero balance</strong>. Confirms your closing entries were correct.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="mega-rule reveal" style="margin-top:3rem">
+      <p class="rule-text">⚡ Quick Memory Trick:<br>
+        <span class="highlight">"I</span> <span class="highlight2">Just</span> <span class="highlight3">Posted</span> <span class="highlight4">Tremendous</span> <span style="color:var(--purple)">Financial</span> <span class="highlight-danger">Closing</span> <span class="highlight">After"</span>
+      </p>
+      <p style="margin-top:1rem;color:var(--text2);font-size:.9rem">Identify → Journal → Post → Trial Balance → Financial Statements → Close → After-Closing Trial Balance</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SECTION: JOURNAL ─── -->
+<section id="journal">
+  <div class="container">
+    <p class="section-title">📝 The <span>Journal</span></p>
+    <p class="section-sub">The diary of the business. Every transaction written CHRONOLOGICALLY. Debit always first.</p>
+
+    <div class="alert reveal">
+      <div class="alert-icon">⚡</div>
+      <div class="alert-text"><strong>The Golden Rule of Every Journal Entry:</strong><br>
+      Total Debits ALWAYS = Total Credits. If they don't match → STOP, find the error before moving on. This is non-negotiable in accounting.</div>
+    </div>
+
+    <!-- DEBIT/CREDIT RULES GRID -->
+    <div class="grid grid-2 reveal" style="margin-bottom:2rem">
+      <div class="card">
+        <div class="card-icon">⬆️</div>
+        <h3>What DEBITS Do (DR)</h3>
+        <ul>
+          <li><strong>Assets</strong> — <span class="highlight">INCREASE</span></li>
+          <li><strong>Expenses</strong> — <span class="highlight">INCREASE</span></li>
+          <li><strong>Losses</strong> — <span class="highlight">INCREASE</span></li>
+          <li><strong>Drawings</strong> — <span class="highlight">INCREASE</span></li>
+          <li><strong>Liabilities</strong> — <span class="highlight-danger">DECREASE</span></li>
+          <li><strong>Revenues</strong> — <span class="highlight-danger">DECREASE</span></li>
+          <li><strong>Capital</strong> — <span class="highlight-danger">DECREASE</span></li>
+        </ul>
+      </div>
+      <div class="card red">
+        <div class="card-icon">⬇️</div>
+        <h3>What CREDITS Do (CR)</h3>
+        <ul>
+          <li><strong>Liabilities</strong> — <span class="highlight">INCREASE</span></li>
+          <li><strong>Revenues</strong> — <span class="highlight">INCREASE</span></li>
+          <li><strong>Gains</strong> — <span class="highlight">INCREASE</span></li>
+          <li><strong>Capital</strong> — <span class="highlight">INCREASE</span></li>
+          <li><strong>Assets</strong> — <span class="highlight-danger">DECREASE</span></li>
+          <li><strong>Expenses</strong> — <span class="highlight-danger">DECREASE</span></li>
+          <li><strong>Drawings</strong> — <span class="highlight-danger">DECREASE</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="formula reveal">
+      🧠 DEAD CLIC Memory Trick:<br>
+      <span class="highlight">D</span>ebit = <span class="highlight">D</span>rawings, <span class="highlight">E</span>xpenses, <span class="highlight">A</span>ssets, <span class="highlight">D</span>ecrease-in-Liabilities<br>
+      <span class="highlight2">C</span>redit = <span class="highlight2">C</span>apital, <span class="highlight2">L</span>iabilities, <span class="highlight2">I</span>ncome (Revenue), <span class="highlight2">C</span>redit-increases-these
+    </div>
+
+    <!-- ACTUAL JOURNAL EXAMPLE (Problem 3-1) -->
+    <p style="font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:700;margin-bottom:1.25rem;margin-top:2rem" class="reveal">
+      Full Journal Example — <span class="highlight">Problem 3-1</span>
+    </p>
+
+    <div style="overflow-x:auto" class="reveal">
+      <table class="journal-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Account Name</th>
+            <th>Debit (DR)</th>
+            <th>Credit (CR)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="debit-row"><td>Jan 1</td><td>Cash</td><td class="amount-dr">75,000</td><td></td></tr>
+          <tr class="credit-row"><td></td><td>&nbsp;&nbsp;&nbsp;Capital</td><td></td><td class="amount-cr">75,000</td></tr>
+          <tr><td colspan="4" style="padding:.25rem;font-size:.75rem;color:var(--text2);font-style:italic">✦ Owner deposited cash as investment in business</td></tr>
+
+          <tr class="debit-row"><td>Jan 5</td><td>Cash</td><td class="amount-dr">25,000</td><td></td></tr>
+          <tr class="credit-row"><td></td><td>&nbsp;&nbsp;&nbsp;Loan Payable</td><td></td><td class="amount-cr">25,000</td></tr>
+          <tr><td colspan="4" style="padding:.25rem;font-size:.75rem;color:var(--text2);font-style:italic">✦ Borrowed cash from bank → liability increases</td></tr>
+
+          <tr class="debit-row"><td>Jan 8</td><td>Building</td><td class="amount-dr">60,000</td><td></td></tr>
+          <tr class="credit-row"><td></td><td>&nbsp;&nbsp;&nbsp;Cash</td><td></td><td class="amount-cr">25,000</td></tr>
+          <tr class="credit-row"><td></td><td>&nbsp;&nbsp;&nbsp;Notes Payable</td><td></td><td class="amount-cr">35,000</td></tr>
+          <tr><td colspan="4" style="padding:.25rem;font-size:.75rem;color:var(--text2);font-style:italic">✦ Bought building: part cash, rest on note (promise to pay later)</td></tr>
+
+          <tr class="debit-row"><td>Jan 9</td><td>Office Supplies</td><td class="amount-dr">10,000</td><td></td></tr>
+          <tr class="credit-row"><td></td><td>&nbsp;&nbsp;&nbsp;Accounts Payable</td><td></td><td class="amount-cr">10,000</td></tr>
+          <tr><td colspan="4" style="padding:.25rem;font-size:.75rem;color:var(--text2);font-style:italic">✦ Bought on credit → A/P is a liability (we owe money)</td></tr>
+
+          <tr class="debit-row"><td>Jan 12</td><td>Rent Expense</td><td class="amount-dr">4,000</td><td></td></tr>
+          <tr class="credit-row"><td></td><td>&nbsp;&nbsp;&nbsp;Cash</td><td></td><td class="amount-cr">4,000</td></tr>
+          <tr><td colspan="4" style="padding:.25rem;font-size:.75rem;color:var(--text2);font-style:italic">✦ Expense paid in cash → expense DR, asset (cash) CR</td></tr>
+
+          <tr class="debit-row"><td>Jan 15</td><td>Cash</td><td class="amount-dr">12,000</td><td></td></tr>
+          <tr class="credit-row"><td></td><td>&nbsp;&nbsp;&nbsp;Service Revenue</td><td></td><td class="amount-cr">12,000</td></tr>
+          <tr><td colspan="4" style="padding:.25rem;font-size:.75rem;color:var(--text2);font-style:italic">✦ Cash received for service → asset DR, revenue CR</td></tr>
+
+          <tr class="debit-row"><td>Jan 18</td><td>Accounts Payable</td><td class="amount-dr">10,000</td><td></td></tr>
+          <tr class="credit-row"><td></td><td>&nbsp;&nbsp;&nbsp;Cash</td><td></td><td class="amount-cr">10,000</td></tr>
+          <tr><td colspan="4" style="padding:.25rem;font-size:.75rem;color:var(--text2);font-style:italic">✦ Paying off debt → liability decreases (DR), cash decreases (CR)</td></tr>
+
+          <tr class="debit-row"><td>Jan 22</td><td>Accounts Receivable</td><td class="amount-dr">10,000</td><td></td></tr>
+          <tr class="credit-row"><td></td><td>&nbsp;&nbsp;&nbsp;Service Revenue</td><td></td><td class="amount-cr">10,000</td></tr>
+          <tr><td colspan="4" style="padding:.25rem;font-size:.75rem;color:var(--text2);font-style:italic">✦ Service on account → customer owes us, A/R is asset (DR)</td></tr>
+
+          <tr class="debit-row"><td>Jan 25</td><td>Salaries Expense</td><td class="amount-dr">4,000</td><td></td></tr>
+          <tr class="credit-row"><td></td><td>&nbsp;&nbsp;&nbsp;Cash</td><td></td><td class="amount-cr">4,000</td></tr>
+          <tr><td colspan="4" style="padding:.25rem;font-size:.75rem;color:var(--text2);font-style:italic">✦ Salary is an expense → DR expense, CR cash</td></tr>
+
+          <tr class="debit-row"><td>Jan 28</td><td>Cash</td><td class="amount-dr">10,000</td><td></td></tr>
+          <tr class="credit-row"><td></td><td>&nbsp;&nbsp;&nbsp;Accounts Receivable</td><td></td><td class="amount-cr">10,000</td></tr>
+          <tr><td colspan="4" style="padding:.25rem;font-size:.75rem;color:var(--text2);font-style:italic">✦ Customer pays → cash in, A/R goes to zero</td></tr>
+
+          <tr class="debit-row"><td>Jan 31</td><td>Drawings</td><td class="amount-dr">2,000</td><td></td></tr>
+          <tr class="credit-row"><td></td><td>&nbsp;&nbsp;&nbsp;Cash</td><td></td><td class="amount-cr">2,000</td></tr>
+          <tr><td colspan="4" style="padding:.25rem;font-size:.75rem;color:var(--text2);font-style:italic">✦ Owner takes cash out → Drawings is NOT an expense, it reduces equity</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Account Type Cheat Sheet -->
+    <p style="font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:700;margin:2.5rem 0 1.25rem" class="reveal">
+      ⚡ Account Type Quick Reference
+    </p>
+
+    <div class="card reveal" style="padding:0;overflow:hidden">
+      <div style="display:grid;grid-template-columns:2fr 1fr 1fr;background:var(--bg3);padding:.85rem 1.25rem;border-bottom:2px solid var(--border)">
+        <span style="font-family:'Space Mono',monospace;font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text2)">Account / What It Is</span>
+        <span style="font-family:'Space Mono',monospace;font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);text-align:center">Normal Balance</span>
+        <span style="font-family:'Space Mono',monospace;font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;color:var(--purple);text-align:center">Temp/Perm</span>
+      </div>
+      <div class="cheat-row">
+        <div class="cheat-account">Cash / A/R / Building / Supplies / Equipment</div>
+        <div class="cheat-dr" style="flex:1;text-align:center;justify-content:center">DEBIT <span class="badge badge-dr">DR</span></div>
+        <div class="cheat-cr" style="flex:1;text-align:center;justify-content:center;background:rgba(168,85,247,.04);color:var(--purple)">PERMANENT</div>
+      </div>
+      <div class="cheat-row">
+        <div class="cheat-account">Loan / A/P / Notes Payable</div>
+        <div class="cheat-cr" style="flex:1;text-align:center;justify-content:center">CREDIT <span class="badge badge-cr">CR</span></div>
+        <div class="cheat-cr" style="flex:1;text-align:center;justify-content:center;background:rgba(168,85,247,.04);color:var(--purple)">PERMANENT</div>
+      </div>
+      <div class="cheat-row">
+        <div class="cheat-account">Capital (Owner's Equity)</div>
+        <div class="cheat-cr" style="flex:1;text-align:center;justify-content:center">CREDIT <span class="badge badge-cr">CR</span></div>
+        <div class="cheat-cr" style="flex:1;text-align:center;justify-content:center;background:rgba(168,85,247,.04);color:var(--purple)">PERMANENT</div>
+      </div>
+      <div class="cheat-row">
+        <div class="cheat-account">Service Revenue / Gains</div>
+        <div class="cheat-cr" style="flex:1;text-align:center;justify-content:center">CREDIT <span class="badge badge-cr">CR</span></div>
+        <div class="cheat-dr" style="flex:1;text-align:center;justify-content:center;background:rgba(255,107,53,.04);color:var(--accent3)">TEMPORARY</div>
+      </div>
+      <div class="cheat-row">
+        <div class="cheat-account">All Expenses / Losses</div>
+        <div class="cheat-dr" style="flex:1;text-align:center;justify-content:center">DEBIT <span class="badge badge-dr">DR</span></div>
+        <div class="cheat-dr" style="flex:1;text-align:center;justify-content:center;background:rgba(255,107,53,.04);color:var(--accent3)">TEMPORARY</div>
+      </div>
+      <div class="cheat-row">
+        <div class="cheat-account">Drawings (Owner Withdrawals)</div>
+        <div class="cheat-dr" style="flex:1;text-align:center;justify-content:center">DEBIT <span class="badge badge-dr">DR</span></div>
+        <div class="cheat-dr" style="flex:1;text-align:center;justify-content:center;background:rgba(255,107,53,.04);color:var(--accent3)">TEMPORARY</div>
+      </div>
+      <div class="cheat-row">
+        <div class="cheat-account">Prepaid Insurance / Rent (Paid in Advance)</div>
+        <div class="cheat-dr" style="flex:1;text-align:center;justify-content:center">DEBIT <span class="badge badge-dr">DR</span></div>
+        <div class="cheat-cr" style="flex:1;text-align:center;justify-content:center;background:rgba(168,85,247,.04);color:var(--purple)">PERMANENT</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── SECTION: LEDGER ─── -->
+<section id="ledger">
+  <div class="container">
+    <p class="section-title">📚 The <span>Ledger</span></p>
+    <p class="section-sub">The ledger groups all entries by account name. Each account = one T-Account.</p>
+
+    <div class="alert reveal">
+      <div class="alert-icon">📌</div>
+      <div class="alert-text">
+        <strong>How to calculate balance:</strong><br>
+        → Assets, Expenses, Drawings: Add all DR amounts, subtract all CR amounts. Result = Debit Balance.<br>
+        → Liabilities, Revenue, Capital: Add all CR amounts, subtract all DR amounts. Result = Credit Balance.
+      </div>
+    </div>
+
+    <div class="grid grid-2 reveal">
+      <!-- Cash T-Account -->
+      <div class="t-account">
+        <div class="t-account-header">CASH (Asset → Normal: DR)</div>
+        <div class="t-account-body">
+          <div class="t-side">
+            <div class="t-side-label">DEBIT (+)</div>
+            <div class="t-row"><span>Jan 1 Capital</span><span>75,000</span></div>
+            <div class="t-row"><span>Jan 5 Loan</span><span>25,000</span></div>
+            <div class="t-row"><span>Jan 15 Revenue</span><span>12,000</span></div>
+            <div class="t-row"><span>Jan 28 A/R</span><span>10,000</span></div>
+            <div class="t-row total"><span>Total</span><span>122,000</span></div>
+            <div class="t-row balance"><span>Balance →</span><span>77,000</span></div>
+          </div>
+          <div class="t-side">
+            <div class="t-side-label">CREDIT (−)</div>
+            <div class="t-row"><span>Jan 8 Building</span><span>25,000</span></div>
+            <div class="t-row"><span>Jan 12 Rent</span><span>4,000</span></div>
+            <div class="t-row"><span>Jan 18 A/P</span><span>10,000</span></div>
+            <div class="t-row"><span>Jan 25 Salaries</span><span>4,000</span></div>
+            <div class="t-row"><span>Jan 31 Drawings</span><span>2,000</span></div>
+            <div class="t-row total"><span>Total</span><span>45,000</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Service Revenue T-Account -->
+      <div class="t-account" style="border-color:var(--accent2)">
+        <div class="t-account-header" style="background:var(--accent2)">SERVICE REVENUE (Revenue → Normal: CR)</div>
+        <div class="t-account-body">
+          <div class="t-side">
+            <div class="t-side-label">DEBIT (−)</div>
+            <div class="t-row"><span style="color:var(--text2);font-style:italic">—</span><span></span></div>
+          </div>
+          <div class="t-side">
+            <div class="t-side-label">CREDIT (+)</div>
+            <div class="t-row"><span>Jan 15 Cash</span><span>12,000</span></div>
+            <div class="t-row"><span>Jan 22 A/R</span><span>10,000</span></div>
+            <div class="t-row total"><span>Total</span><span>22,000</span></div>
+            <div class="t-row balance"><span>Balance →</span><span>22,000</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-3 reveal" style="margin-top:1.5rem">
+      <div class="card purple">
+        <div class="card-icon">🏢</div>
+        <h3>Building (Asset)</h3>
+        <p>DR: 60,000 (Jan 8)<br>CR: 0<br><strong style="color:var(--accent4)">Balance: 60,000 DR</strong></p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🏦</div>
+        <h3>Loan Payable (Liability)</h3>
+        <p>DR: 0<br>CR: 25,000 (Jan 5)<br><strong style="color:var(--accent4)">Balance: 25,000 CR</strong></p>
+      </div>
+      <div class="card gold">
+        <div class="card-icon">📎</div>
+        <h3>Office Supplies (Asset)</h3>
+        <p>DR: 10,000 (Jan 9)<br>CR: 0<br><strong style="color:var(--accent4)">Balance: 10,000 DR</strong></p>
+      </div>
+      <div class="card red">
+        <div class="card-icon">💸</div>
+        <h3>Notes Payable (Liability)</h3>
+        <p>DR: 0<br>CR: 35,000 (Jan 8)<br><strong style="color:var(--accent4)">Balance: 35,000 CR</strong></p>
+      </div>
+      <div class="card">
+        <div class="card-icon">👷</div>
+        <h3>Salaries Expense</h3>
+        <p>DR: 4,000 (Jan 25)<br>CR: 0<br><strong style="color:var(--accent4)">Balance: 4,000 DR</strong></p>
+      </div>
+      <div class="card purple">
+        <div class="card-icon">🏠</div>
+        <h3>Rent Expense</h3>
+        <p>DR: 4,000 (Jan 12)<br>CR: 0<br><strong style="color:var(--accent4)">Balance: 4,000 DR</strong></p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── SECTION: TRIAL BALANCE ─── -->
+<section id="trial">
+  <div class="container">
+    <p class="section-title">⚖️ Trial <span>Balance</span></p>
+    <p class="section-sub">A list of all account balances. Left = Debit, Right = Credit. Must be EQUAL.</p>
+
+    <div class="grid grid-2 reveal" style="margin-bottom:2.5rem">
+      <div class="card">
+        <div class="card-icon">✅</div>
+        <h3>What Trial Balance PROVES</h3>
+        <ul>
+          <li>That total DR = total CR in your ledger</li>
+          <li>Math is correct in your postings</li>
+          <li>You're ready for financial statements</li>
+        </ul>
+      </div>
+      <div class="card red">
+        <div class="card-icon">❌</div>
+        <h3>What Trial Balance Does NOT Prove</h3>
+        <ul>
+          <li>That the <strong>correct accounts</strong> were used</li>
+          <li>That entries were <strong>complete</strong></li>
+          <li>That amounts weren't entered in <strong>wrong accounts</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Trial Balance Table - Problem 3-1 -->
+    <p style="font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:1rem" class="reveal">
+      Trial Balance — Problem 3-1 (Jan 31)
+    </p>
+
+    <div style="overflow-x:auto;background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden" class="reveal">
+      <table class="tb-table">
+        <thead>
+          <tr>
+            <th>Account</th>
+            <th>Debit</th>
+            <th>Credit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="category-header"><td colspan="3">▸ Assets</td></tr>
+          <tr><td>Cash</td><td>77,000</td><td></td></tr>
+          <tr><td>Building</td><td>60,000</td><td></td></tr>
+          <tr><td>Office Supplies</td><td>10,000</td><td></td></tr>
+          <tr class="category-header"><td colspan="3">▸ Liabilities</td></tr>
+          <tr><td>Loan Payable</td><td></td><td>25,000</td></tr>
+          <tr><td>Notes Payable</td><td></td><td>35,000</td></tr>
+          <tr class="category-header"><td colspan="3">▸ Owner's Equity</td></tr>
+          <tr><td>Capital</td><td></td><td>75,000</td></tr>
+          <tr><td>Drawings</td><td>2,000</td><td></td></tr>
+          <tr class="category-header"><td colspan="3">▸ Income / Expenses</td></tr>
+          <tr><td>Service Revenue</td><td></td><td>22,000</td></tr>
+          <tr><td>Rent Expense</td><td>4,000</td><td></td></tr>
+          <tr><td>Salaries Expense</td><td>4,000</td><td></td></tr>
+          <tr class="total-row"><td>TOTAL</td><td>157,000</td><td>157,000</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ORDER RULE -->
+    <div class="alert reveal" style="margin-top:2rem">
+      <div class="alert-icon">📋</div>
+      <div class="alert-text">
+        <strong>Proper Order in Trial Balance (Financial Statement Order):</strong><br>
+        1️⃣ Assets (Long-term first: Buildings, Equipment → then Current: Cash, Supplies, A/R)<br>
+        2️⃣ Liabilities (A/P, N/P, Loans)<br>
+        3️⃣ Owner's Equity (Capital, then Drawings)<br>
+        4️⃣ Revenue accounts<br>
+        5️⃣ Expense accounts
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── SECTION: CLOSING ─── -->
+<section id="closing">
+  <div class="container">
+    <p class="section-title">🔒 Closing <span>Entries</span></p>
+    <p class="section-sub">Reset temporary accounts to ZERO at end of period. 4 closing entries — always in this order.</p>
+
+    <div class="mega-rule reveal">
+      <p class="rule-text">Temporary Accounts = <span class="highlight-danger">REVENUE</span> + <span class="highlight-danger">EXPENSES</span> + <span class="highlight-danger">GAINS</span> + <span class="highlight-danger">LOSSES</span> + <span class="highlight-danger">DRAWINGS</span><br>
+      <span style="font-size:.7em;color:var(--text2)">These all go to ZERO every period → permanent accounts keep their balance forever</span></p>
+    </div>
+
+    <!-- 4 CLOSING ENTRIES -->
+    <div class="closing-block reveal" data-step="STEP 1 OF 4">
+      <h4 class="step1">① Close ALL Revenue & Gains → Income Summary</h4>
+      <div class="closing-entry">
+        <div class="ce-row"><span>Revenue (Service Revenue)</span><span>30,000</span><span></span></div>
+        <div class="ce-row"><span>Gains from selling assets</span><span>3,000</span><span></span></div>
+        <div class="ce-separator"></div>
+        <div class="ce-row credit"><span>Income Summary</span><span></span><span>33,000</span></div>
+      </div>
+      <p style="margin-top:1rem;color:var(--text2);font-size:.85rem">💡 Revenue normally has a CR balance → to close it, DEBIT it (brings it to zero). Income Summary CR increases.</p>
+    </div>
+
+    <div class="closing-block reveal" data-step="STEP 2 OF 4">
+      <h4 class="step2">② Close ALL Expenses & Losses → Income Summary</h4>
+      <div class="closing-entry">
+        <div class="ce-row"><span>Income Summary</span><span>16,000</span><span></span></div>
+        <div class="ce-separator"></div>
+        <div class="ce-row credit"><span>Advertising Expense</span><span></span><span>4,000</span></div>
+        <div class="ce-row credit"><span>Rent Expense</span><span></span><span>5,000</span></div>
+        <div class="ce-row credit"><span>Salaries Expense</span><span></span><span>5,000</span></div>
+        <div class="ce-row credit"><span>Utilities Expense</span><span></span><span>2,000</span></div>
+      </div>
+      <p style="margin-top:1rem;color:var(--text2);font-size:.85rem">💡 Expenses normally have DR balances → to close them, CREDIT them. Income Summary DR decreases.</p>
+    </div>
+
+    <div class="closing-block reveal" data-step="STEP 3 OF 4">
+      <h4 class="step3">③ Close Income Summary → Capital (Net Result)</h4>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem">
+        <div style="background:rgba(0,245,160,.07);border:1px solid rgba(0,245,160,.25);border-radius:10px;padding:1rem">
+          <p style="color:var(--accent);font-weight:700;margin-bottom:.5rem">📈 If NET PROFIT:</p>
+          <div class="closing-entry">
+            <div class="ce-row"><span>Income Summary</span><span>14,000</span><span></span></div>
+            <div class="ce-separator"></div>
+            <div class="ce-row credit"><span>Capital</span><span></span><span>14,000</span></div>
+          </div>
+        </div>
+        <div style="background:rgba(255,71,87,.07);border:1px solid rgba(255,71,87,.25);border-radius:10px;padding:1rem">
+          <p style="color:var(--danger);font-weight:700;margin-bottom:.5rem">📉 If NET LOSS:</p>
+          <div class="closing-entry">
+            <div class="ce-row"><span>Capital</span><span>X,XXX</span><span></span></div>
+            <div class="ce-separator"></div>
+            <div class="ce-row credit"><span>Income Summary</span><span></span><span>X,XXX</span></div>
+          </div>
+        </div>
+      </div>
+      <p style="color:var(--text2);font-size:.85rem">💡 Income Summary CR balance (Revenue > Expenses) = Profit → close by DR Income Summary, CR Capital.</p>
+    </div>
+
+    <div class="closing-block reveal" data-step="STEP 4 OF 4">
+      <h4 class="step4">④ Close Drawings → Capital</h4>
+      <div class="closing-entry">
+        <div class="ce-row"><span>Capital</span><span>3,000</span><span></span></div>
+        <div class="ce-separator"></div>
+        <div class="ce-row credit"><span>Drawings</span><span></span><span>3,000</span></div>
+      </div>
+      <p style="margin-top:1rem;color:var(--text2);font-size:.85rem">💡 Drawings reduces owner's equity. Capital DR (decrease), Drawings CR (zeroed out).</p>
+    </div>
+
+    <!-- NET INCOME FORMULA -->
+    <div class="formula reveal">
+      Net Income = Total Revenues + Gains − Total Expenses − Losses<br>
+      <span style="font-size:.8rem;color:var(--text2)">Then: Capital (End) = Capital (Start) + Net Income − Drawings</span>
+    </div>
+
+    <!-- AFTER CLOSING TRIAL BALANCE -->
+    <p style="font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:700;margin-bottom:1.25rem;margin-top:2.5rem" class="reveal">After-Closing Trial Balance (Problem 3-4)</p>
+
+    <div style="overflow-x:auto;background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden" class="reveal">
+      <table class="tb-table">
+        <thead><tr><th>Account</th><th>Debit</th><th>Credit</th></tr></thead>
+        <tbody>
+          <tr class="category-header"><td colspan="3">▸ Permanent Accounts Only (Temporary = ZERO)</td></tr>
+          <tr><td>Cash</td><td>10,000</td><td></td></tr>
+          <tr><td>Accounts Receivable</td><td>15,000</td><td></td></tr>
+          <tr><td>Notes Receivable</td><td>5,000</td><td></td></tr>
+          <tr><td>Building</td><td>30,000</td><td></td></tr>
+          <tr><td>Equipment</td><td>20,000</td><td></td></tr>
+          <tr><td>Accounts Payable</td><td></td><td>6,000</td></tr>
+          <tr><td>Capital (updated: 63,000 + 14,000 − 3,000)</td><td></td><td>74,000</td></tr>
+          <tr class="total-row"><td>TOTAL</td><td>80,000</td><td>80,000</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── SECTION: TRICKS ─── -->
+<section id="tricks">
+  <div class="container">
+    <p class="section-title">🧠 <span>Exam Tricks</span> & Mnemonics</p>
+    <p class="section-sub">The shortcuts that separate A students from everyone else.</p>
+
+    <div class="trick-card reveal">
+      <span class="trick-tag">🏆 The Most Important Rule</span>
+      <h3>DEAD CLIC — What Goes Where</h3>
+      <p><span class="highlight">D</span>rawings, <span class="highlight">E</span>xpenses, <span class="highlight">A</span>ssets, <span class="highlight">D</span>ebit-normal = DEBIT side accounts</p>
+      <p style="margin-top:.5rem"><span class="highlight2">C</span>apital, <span class="highlight2">L</span>iabilities, <span class="highlight2">I</span>ncome, <span class="highlight2">C</span>redit-normal = CREDIT side accounts</p>
+      <p style="margin-top:.75rem;font-size:.85rem;color:var(--text2)">When these accounts <strong style="color:var(--text)">increase</strong> → use their normal side. When they <strong style="color:var(--text)">decrease</strong> → use the opposite side.</p>
+    </div>
+
+    <div class="trick-card reveal">
+      <span class="trick-tag fire">🔥 Exam Trap</span>
+      <h3>Drawings ≠ Expense — Don't Confuse Them!</h3>
+      <p>Drawings is the owner taking money out for personal use. It is <span class="highlight-danger">NOT an expense</span> on the Income Statement. It only appears on the Balance Sheet under Owner's Equity (reduces capital). Exams love to trick you on this.</p>
+      <p style="margin-top:.75rem;font-size:.85rem"><span class="highlight">Expense</span> → reduces Net Income → on Income Statement<br><span class="highlight-danger">Drawings</span> → reduces Capital directly → on Balance Sheet only</p>
+    </div>
+
+    <div class="trick-card reveal">
+      <span class="trick-tag gold">💛 Memorize This Equation</span>
+      <h3>The Accounting Equation (Never Breaks)</h3>
+      <div class="formula" style="font-size:1.2rem;margin:1rem 0">
+        Assets = Liabilities + Owner's Equity
+      </div>
+      <p>Every single transaction keeps this equation balanced. If you're unsure about an entry, check — does it still balance the equation?</p>
+    </div>
+
+    <div class="trick-card reveal">
+      <span class="trick-tag">🎯 Notes vs Accounts Payable</span>
+      <h3>A/P vs N/P vs Loan Payable — What's the Difference?</h3>
+      <div style="overflow-x:auto;margin-top:1rem">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>Accounts Payable (A/P)</th>
+              <th>Notes Payable (N/P)</th>
+              <th>Loan Payable</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>What is it?</td><td>Money owed to suppliers for goods/services</td><td>Formal written promise to pay (signed note)</td><td>Borrowed money from a bank</td></tr>
+            <tr><td>Has interest?</td><td>Usually No</td><td>Yes (usually)</td><td>Yes</td></tr>
+            <tr><td>How created?</td><td>Buy on credit (e.g. office supplies)</td><td>Sign a note (e.g. buying building)</td><td>Formal bank loan</td></tr>
+            <tr><td>Normal balance</td><td>CREDIT</td><td>CREDIT</td><td>CREDIT</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="trick-card reveal">
+      <span class="trick-tag fire">🔥 Another Classic Trap</span>
+      <h3>Prepaid Insurance/Rent = ASSET, Not Expense</h3>
+      <p>When you pay BEFORE receiving the benefit → it's a <span class="highlight">Prepaid (Asset)</span>. When the period passes and you've used the service → it becomes an <span class="highlight-danger">Expense</span>.</p>
+      <p style="margin-top:.75rem;font-size:.85rem;color:var(--text2)">Example: Paid $1,000 for 1-year insurance → DR Prepaid Insurance $1,000 (Asset), NOT expense yet!</p>
+    </div>
+
+    <div class="trick-card reveal">
+      <span class="trick-tag">📊 Income Statement Structure</span>
+      <h3>How to Build the Income Statement (Order Matters!)</h3>
+      <div style="background:var(--bg3);border-radius:10px;padding:1.25rem;margin-top:1rem;font-family:'Space Mono',monospace;font-size:.85rem;line-height:2">
+        <div style="color:var(--accent)">REVENUES</div>
+        <div style="padding-left:1.5rem;color:var(--text2)">+ Service Revenue &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $XX,XXX</div>
+        <div style="padding-left:1.5rem;color:var(--text2)">+ Gains from selling assets &nbsp; $X,XXX</div>
+        <div style="border-bottom:1px solid var(--border);margin:.25rem 0"></div>
+        <div style="color:var(--accent4)">= Total Revenues &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $XX,XXX</div>
+        <div style="color:var(--danger);margin-top:.5rem">EXPENSES (subtract)</div>
+        <div style="padding-left:1.5rem;color:var(--text2)">− Salaries Expense</div>
+        <div style="padding-left:1.5rem;color:var(--text2)">− Rent Expense</div>
+        <div style="padding-left:1.5rem;color:var(--text2)">− Advertising Expense</div>
+        <div style="padding-left:1.5rem;color:var(--text2)">− Other Expenses</div>
+        <div style="border-bottom:1px solid var(--border);margin:.25rem 0"></div>
+        <div style="color:var(--accent4)">= Total Expenses &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $(XX,XXX)</div>
+        <div style="border-bottom:2px solid var(--accent);margin:.25rem 0"></div>
+        <div style="color:var(--accent);font-weight:700">NET INCOME (or LOSS) &nbsp;&nbsp;&nbsp;&nbsp; $XX,XXX</div>
+      </div>
+    </div>
+
+    <div class="trick-card reveal">
+      <span class="trick-tag gold">💛 Balance Sheet Structure</span>
+      <h3>Statement of Financial Position Layout</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem">
+        <div style="background:var(--bg3);border-radius:10px;padding:1.25rem;font-family:'Space Mono',monospace;font-size:.8rem;line-height:2">
+          <div style="color:var(--accent);font-weight:700;margin-bottom:.5rem">LEFT: ASSETS</div>
+          <div style="color:var(--text2)">Current Assets:</div>
+          <div style="padding-left:1rem;color:var(--text2)">Cash</div>
+          <div style="padding-left:1rem;color:var(--text2)">A/R</div>
+          <div style="padding-left:1rem;color:var(--text2)">Supplies/Prepaid</div>
+          <div style="color:var(--text2);margin-top:.5rem">Non-Current (PPE):</div>
+          <div style="padding-left:1rem;color:var(--text2)">Land, Building</div>
+          <div style="padding-left:1rem;color:var(--text2)">Equipment</div>
+          <div style="padding-left:1rem;color:var(--text2)">Furniture/Trucks</div>
+          <div style="border-top:2px solid var(--accent);margin-top:.5rem;padding-top:.5rem;color:var(--accent);font-weight:700">= Total Assets</div>
+        </div>
+        <div style="background:var(--bg3);border-radius:10px;padding:1.25rem;font-family:'Space Mono',monospace;font-size:.8rem;line-height:2">
+          <div style="color:var(--accent2);font-weight:700;margin-bottom:.5rem">RIGHT: LIABILITIES + EQUITY</div>
+          <div style="color:var(--text2)">Liabilities:</div>
+          <div style="padding-left:1rem;color:var(--text2)">A/P, N/P, Loan P.</div>
+          <div style="color:var(--text2);margin-top:.5rem">Owner's Equity:</div>
+          <div style="padding-left:1rem;color:var(--text2)">Capital (start)</div>
+          <div style="padding-left:1rem;color:var(--accent)">+ Net Income</div>
+          <div style="padding-left:1rem;color:var(--danger)">− Drawings</div>
+          <div style="border-top:2px solid var(--accent2);margin-top:.5rem;padding-top:.5rem;color:var(--accent2);font-weight:700">= Total L + E</div>
+        </div>
+      </div>
+      <p style="margin-top:1rem;color:var(--accent4);font-size:.875rem;font-weight:600">⚡ Always: Total Assets = Total Liabilities + Total Owner's Equity</p>
+    </div>
+
+    <div class="trick-card reveal">
+      <span class="trick-tag">🔄 A/R vs A/P — Cash vs Credit</span>
+      <h3>When is Cash Used vs. Credit?</h3>
+      <div style="overflow-x:auto">
+        <table class="compare-table" style="margin-top:1rem">
+          <thead>
+            <tr><th>Situation</th><th>Cash Entry</th><th>Credit Entry</th><th>Key Account</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Provide service to customer</td><td>DR Cash / CR Revenue</td><td>DR A/R / CR Revenue</td><td>A/R = customer owes US</td></tr>
+            <tr><td>Buy supplies/goods</td><td>DR Supplies / CR Cash</td><td>DR Supplies / CR A/P</td><td>A/P = WE owe supplier</td></tr>
+            <tr><td>Collect from customer</td><td>DR Cash / CR A/R</td><td>—</td><td>A/R goes to zero</td></tr>
+            <tr><td>Pay supplier</td><td>DR A/P / CR Cash</td><td>—</td><td>A/P goes to zero</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── SECTION: QUIZ ─── -->
+<section id="quiz">
+  <div class="container" style="max-width:800px">
+    <p class="section-title">🎯 <span>Quiz Yourself</span></p>
+    <p class="section-sub">Test everything. Click an answer — explanation shows instantly.</p>
+
+    <div id="quizContainer"></div>
+    <div class="quiz-score" id="quizScore">
+      <div class="score-num" id="scoreNum">0/0</div>
+      <p style="font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:700;margin:.5rem 0" id="scoreMsg"></p>
+      <p style="color:var(--text2);margin-bottom:1.5rem" id="scoreDetail"></p>
+      <button onclick="resetQuiz()" style="background:var(--accent);color:var(--bg);border:none;padding:.85rem 2rem;border-radius:50px;font-family:'Space Mono',monospace;font-weight:700;cursor:pointer;font-size:.9rem">🔄 Try Again</button>
+    </div>
+  </div>
+</section>
+
+<script>
+// ─── NAVIGATION ───
+const sections = ['cycle','journal','ledger','trial','closing','tricks','quiz'];
+
+function showSection(id) {
+  document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+
+  document.querySelectorAll('.pill, .sticky-pill').forEach(p => {
+    p.classList.toggle('active', p.textContent.toLowerCase().includes(id) || p.getAttribute('onclick')?.includes(id));
+  });
+
+  window.scrollTo({top: 0, behavior:'smooth'});
+  setTimeout(initReveal, 100);
+}
+
+// ─── STICKY NAV ───
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('stickyNav');
+  const btn = document.getElementById('floatingBtn');
+  const hero = document.getElementById('heroSection');
+  const past = window.scrollY > hero.offsetHeight * 0.5;
+  nav.classList.toggle('visible', past);
+  btn.style.display = past ? 'block' : 'none';
+
+  // Progress bar
+  const total = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('progressBar').style.width = (window.scrollY / total * 100) + '%';
+});
+
+// ─── REVEAL ON SCROLL ───
+function initReveal() {
+  const reveals = document.querySelectorAll('.reveal:not(.visible)');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e,i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(r => observer.observe(r));
+}
+
+initReveal();
+
+// ─── QUIZ DATA ───
+const questions = [
+  {
+    q: "What is the FIRST step in the accounting cycle?",
+    opts: ["Recording in Journal","Identify transactions and events that should be recorded","Preparing Trial Balance","Posting to Ledger"],
+    ans: 1,
+    explain: "Step 1 is always to IDENTIFY which transactions and events should be recorded. Not everything that happens gets recorded — only financial transactions!"
+  },
+  {
+    q: "On January 8, a company buys a building for $60,000 — pays $25,000 cash, signs a note for the rest. What is the credit entry for 'Notes Payable'?",
+    opts: ["$60,000","$25,000","$35,000","$10,000"],
+    ans: 2,
+    explain: "Building costs $60,000. Cash paid = $25,000. Remaining = 60,000 − 25,000 = $35,000 on Notes Payable (a formal written promise to pay)."
+  },
+  {
+    q: "A company provides services to a customer and the customer will pay LATER. Which account is debited?",
+    opts: ["Cash","Service Revenue","Accounts Payable","Accounts Receivable"],
+    ans: 3,
+    explain: "When service is on ACCOUNT (customer owes us), we DR Accounts Receivable (it's an asset — the right to collect money). CR Service Revenue."
+  },
+  {
+    q: "In the Trial Balance, total Debits = $150,000. What must total Credits equal?",
+    opts: ["$75,000","$300,000","$150,000","Depends on the accounts"],
+    ans: 2,
+    explain: "The fundamental rule: Total Debits ALWAYS = Total Credits in the Trial Balance. If they don't match, you have an error."
+  },
+  {
+    q: "Which of these accounts is TEMPORARY (gets closed at end of period)?",
+    opts: ["Cash","Building","Accounts Payable","Salaries Expense"],
+    ans: 3,
+    explain: "Expenses are TEMPORARY accounts. They get closed to Income Summary at period end. Cash, Building, A/P are permanent accounts — they carry forward."
+  },
+  {
+    q: "Owner withdraws $2,000 cash from the business. How is this recorded?",
+    opts: ["DR Expense $2,000 / CR Cash $2,000","DR Drawings $2,000 / CR Cash $2,000","DR Capital $2,000 / CR Revenue $2,000","DR Cash $2,000 / CR Capital $2,000"],
+    ans: 1,
+    explain: "Drawings is NOT an expense. It's the owner taking money out. DR Drawings (reduces equity), CR Cash (asset decreases). Drawings is temporary and gets closed to Capital."
+  },
+  {
+    q: "Total Revenue = $78,000. Total Expenses = $26,000. What is Net Income?",
+    opts: ["$104,000","$26,000","$52,000","$78,000"],
+    ans: 2,
+    explain: "Net Income = Revenue − Expenses = $78,000 − $26,000 = $52,000. This goes to the Income Statement and then increases Capital on the Balance Sheet."
+  },
+  {
+    q: "Which is the CORRECT order for the 4 closing entries?",
+    opts: [
+      "Drawings → Revenue → Expenses → Income Summary",
+      "Revenue → Expenses → Income Summary → Drawings",
+      "Expenses → Revenue → Drawings → Income Summary",
+      "Income Summary → Revenue → Expenses → Capital"
+    ],
+    ans: 1,
+    explain: "Always: ① Close Revenue to Income Summary ② Close Expenses to Income Summary ③ Close Income Summary to Capital (net result) ④ Close Drawings to Capital."
+  },
+  {
+    q: "A company pays $1,000 for a 1-year insurance policy upfront. How is it recorded?",
+    opts: [
+      "DR Insurance Expense $1,000 / CR Cash $1,000",
+      "DR Cash $1,000 / CR Prepaid Insurance $1,000",
+      "DR Prepaid Insurance $1,000 / CR Cash $1,000",
+      "DR Capital $1,000 / CR Cash $1,000"
+    ],
+    ans: 2,
+    explain: "Paid BEFORE using = Prepaid (Asset). DR Prepaid Insurance (asset increases), CR Cash (asset decreases). It becomes an expense only as time passes."
+  },
+  {
+    q: "After all closing entries, what accounts appear in the After-Closing Trial Balance?",
+    opts: [
+      "All accounts including Revenue and Expenses",
+      "Only Revenue and Expense accounts",
+      "Only permanent accounts (Assets, Liabilities, Capital)",
+      "Only Capital and Cash"
+    ],
+    ans: 2,
+    explain: "After closing, ALL temporary accounts (Revenue, Expenses, Gains, Losses, Drawings) = ZERO. Only permanent accounts (Assets, Liabilities, Capital) remain with balances."
+  },
+  {
+    q: "Capital at start = $63,000. Net Income = $14,000. Drawings = $3,000. What is ending Capital?",
+    opts: ["$77,000","$74,000","$80,000","$49,000"],
+    ans: 1,
+    explain: "Ending Capital = Starting Capital + Net Income − Drawings = $63,000 + $14,000 − $3,000 = $74,000. Net income INCREASES equity, drawings DECREASES it."
+  },
+  {
+    q: "What does 'Accounts Payable' represent?",
+    opts: [
+      "Money customers owe the company",
+      "Money the company borrowed from a bank",
+      "Money the company owes to suppliers for credit purchases",
+      "A formal signed promise to pay"
+    ],
+    ans: 2,
+    explain: "A/P = money WE owe suppliers for things bought on credit (like office supplies). A/R = money others owe US. N/P = formal note signed. Loan = bank borrowing."
+  },
+];
+
+let answered = [];
+
+function buildQuiz() {
+  const container = document.getElementById('quizContainer');
+  container.innerHTML = '';
+  answered = new Array(questions.length).fill(null);
+
+  questions.forEach((q, qi) => {
+    const box = document.createElement('div');
+    box.className = 'quiz-box reveal';
+    box.id = `qbox${qi}`;
+
+    const letters = ['A','B','C','D'];
+    box.innerHTML = `
+      <div class="quiz-q">${qi+1}. ${q.q}</div>
+      <div class="quiz-options">
+        ${q.opts.map((o,oi) => `
+          <div class="quiz-opt" id="opt${qi}_${oi}" onclick="selectAnswer(${qi},${oi})">
+            <div class="opt-letter">${letters[oi]}</div>
+            <span>${o}</span>
+          </div>
+        `).join('')}
+      </div>
+      <div class="quiz-feedback" id="fb${qi}"></div>
+    `;
+    container.appendChild(box);
+  });
+
+  setTimeout(initReveal, 100);
+}
+
+function selectAnswer(qi, chosen) {
+  if (answered[qi] !== null) return; // already answered
+  answered[qi] = chosen;
+
+  const q = questions[qi];
+  const isCorrect = chosen === q.ans;
+  const box = document.getElementById(`qbox${qi}`);
+  const fb = document.getElementById(`fb${qi}`);
+
+  // Style options
+  q.opts.forEach((_,oi) => {
+    const opt = document.getElementById(`opt${qi}_${oi}`);
+    if (oi === q.ans) opt.classList.add('correct-ans');
+    else if (oi === chosen && !isCorrect) opt.classList.add('wrong-ans');
+  });
+
+  box.classList.add(isCorrect ? 'correct' : 'wrong');
+  fb.className = `quiz-feedback show ${isCorrect ? 'correct-fb' : 'wrong-fb'}`;
+  fb.innerHTML = `${isCorrect ? '✅ Correct!' : '❌ Wrong!'} — ${q.explain}`;
+
+  // Check if all answered
+  if (answered.every(a => a !== null)) {
+    showScore();
+  }
+}
+
+function showScore() {
+  const correct = answered.filter((a,i) => a === questions[i].ans).length;
+  const total = questions.length;
+  const pct = Math.round(correct/total*100);
+
+  const scoreEl = document.getElementById('quizScore');
+  document.getElementById('scoreNum').textContent = `${correct}/${total}`;
+  document.getElementById('scoreDetail').textContent = `${pct}% — ${pct >= 90 ? 'Absolute legend 🏆' : pct >= 70 ? 'Strong performance 💪' : pct >= 50 ? 'Getting there 📈' : 'Review the material and try again 📚'}`;
+  document.getElementById('scoreMsg').textContent = pct === 100 ? 'PERFECT SCORE! 🔥🔥🔥' : pct >= 80 ? 'Excellent! Almost there! 🌟' : pct >= 60 ? 'Good job, keep going!' : 'Review & retry!';
+
+  scoreEl.classList.add('show');
+  scoreEl.scrollIntoView({behavior:'smooth', block:'center'});
+}
+
+function resetQuiz() {
+  document.getElementById('quizScore').classList.remove('show');
+  buildQuiz();
+  window.scrollTo({top: document.getElementById('quiz').offsetTop, behavior:'smooth'});
+}
+
+buildQuiz();
+</script>
+</body>
+</html>
